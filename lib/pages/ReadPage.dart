@@ -435,13 +435,16 @@ class _ReadPageState extends State<ReadPage> {
   /** 广告组件 */
   Widget _banner() {
     return new Container(
-      margin: const EdgeInsets.only(top: 11.0),
-      child: new Container(height: 62.0,width: 347.0,
-        margin: const EdgeInsets.fromLTRB(15.0, 12.0, 15.0, 5.0),
-        decoration: new ShapeDecoration(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0))),
-     child:_bannerView(),
-    
-    ));
+        margin: const EdgeInsets.only(top: 11.0),
+        child: new Container(
+          height: 62.0,
+          width: 347.0,
+          margin: const EdgeInsets.fromLTRB(15.0, 12.0, 15.0, 5.0),
+          decoration: new ShapeDecoration(
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(15.0))),
+          child: _bannerView(),
+        ));
   }
 
   BannerView _bannerView() {
@@ -454,13 +457,24 @@ class _ReadPageState extends State<ReadPage> {
         // new Card(shape: new RoundedRectangleBorder(
         //               borderRadius: new BorderRadius.circular(4.0)),child:  new Image.asset("images/homepage_banner_ad1.png",fit: BoxFit.fill,),),
 
-                 new Card(child: new Image.asset("images/homepage_banner_ad1.png",fit: BoxFit.fill,)),
-                  new Card(child: new Image.asset("images/homepage_banner_ad2.png",fit: BoxFit.fill,)),
-                   new Card(child: new Image.asset("images/homepage_banner_ad3.png",fit: BoxFit.fill,)),
-                  
+        new Card(
+            child: new Image.asset(
+          "images/homepage_banner_ad1.png",
+          fit: BoxFit.fill,
+        )),
+        new Card(
+            child: new Image.asset(
+          "images/homepage_banner_ad2.png",
+          fit: BoxFit.fill,
+        )),
+        new Card(
+            child: new Image.asset(
+          "images/homepage_banner_ad3.png",
+          fit: BoxFit.fill,
+        )),
       ],
       log: false,
-      indicatorMargin:4.0,
+      indicatorMargin: 4.0,
       indicatorNormal: new Container(
         width: 5.0,
         height: 5.0,
@@ -475,17 +489,20 @@ class _ReadPageState extends State<ReadPage> {
         decoration: new BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
-         
         ),
       ),
       indicatorBuilder: (context, indicator) {
-        Widget cc = new Align(alignment: Alignment.bottomCenter,child: Container(margin: const EdgeInsets.only(bottom: 2.0),
-         alignment: Alignment.center,
-          height: 15.0,
-          width: double.infinity,
-          color: Colors.transparent,
-          child: indicator,
-        ),);
+        Widget cc = new Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 2.0),
+            alignment: Alignment.center,
+            height: 15.0,
+            width: double.infinity,
+            color: Colors.transparent,
+            child: indicator,
+          ),
+        );
         return cc;
       },
     );
@@ -549,7 +566,8 @@ class _ReadPageState extends State<ReadPage> {
                             new Container(
                               padding:
                                   const EdgeInsets.only(top: 12.0, left: 12.0),
-                              child: new Row(crossAxisAlignment: CrossAxisAlignment.center,
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   new Text(
                                     "陈明明",
@@ -557,10 +575,13 @@ class _ReadPageState extends State<ReadPage> {
                                         fontSize: 18.0, color: Colors.white),
                                   ),
                                   new Container(
-                                    padding: const EdgeInsets.only(left: 4.5,top: 4.5),
-                                    child: new Image.asset("images/icon_Lv3.png",width: 22.0,height: 9.0,)
-                                  ),
-                              
+                                      padding: const EdgeInsets.only(
+                                          left: 4.5, top: 4.5),
+                                      child: new Image.asset(
+                                        "images/icon_Lv3.png",
+                                        width: 22.0,
+                                        height: 9.0,
+                                      )),
                                 ],
                               ),
                             ),
@@ -701,7 +722,7 @@ class _ReadPageState extends State<ReadPage> {
               ),
               classWall(),
               _privateWedgit(),
-               _banner(),
+              _banner(),
             ],
           ),
         ],

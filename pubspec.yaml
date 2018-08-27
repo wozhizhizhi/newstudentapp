@@ -54,6 +54,9 @@ flutter:
     - images/icon_Lv2.png
     - images/icon_Lv3.png
     - images/icon_Lv4.png
+    - images/task_banner_ad1.png
+    - images/task_banner_ad2.png
+    - images/task_banner_ad3.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
