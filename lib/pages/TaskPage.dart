@@ -8,7 +8,7 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
-  List<String> _tabs = ["图书", "学校", "老师"];
+  List<String> _tabs = ["语文", "数学", "英语", "美术", "音乐", "体育"];
   TabController _tabController;
 
   @override
@@ -21,33 +21,73 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-          "我的任务",
-          style: new TextStyle(fontSize: 18.0, color: Colors.grey[600]),
-        ),
-      ),
       body: new NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            new PreferredSize(
-              preferredSize: new Size.fromHeight(44.0),
-              child: new SliverAppBar(
-                expandedHeight: 156.0,
-                flexibleSpace: new FlexibleSpaceBar(
-                  background: _banner(),
-                ),
-                pinned: false,
+            new SliverAppBar(
+              title: new Text(
+                "我的任务",
+                style: new TextStyle(
+                    fontSize: 18.0, color: StudentColors.s_484848),
               ),
+              centerTitle: true,
+              expandedHeight: 230.0,
+              backgroundColor: Colors.white,
+              flexibleSpace: new FlexibleSpaceBar(
+                background: new Container(
+                  child: _banner(),
+                  padding: const EdgeInsets.only(top: 75.0),
+                ),
+              ),
+              pinned: true,
             ),
+            new SliverPersistentHeader(
+              delegate: new _SliverAppBarDelegate(new TabBar(
+                  controller: _tabController,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 3.0,
+                  indicatorColor: StudentColors.tabTextSelectedColor,
+                  labelColor: StudentColors.s_484848,
+                  unselectedLabelColor: StudentColors.s_9a9a9a,
+                  tabs: _tabs.map((name) {
+                    return new Tab(
+                      text: name,
+                    );
+                  }).toList())),
+              pinned: true,
+            ),
+//            new Divider(height: 1.0,color: StudentColors.s_f6f6f6,),
           ];
         },
-        body: new Center(
-          child: new Text("Hello"),
+        body: new TabBarView(
+          children: _tabs.map((name) {
+            return _buildItemBarView(name);
+          }).toList(),
+          controller: _tabController,
         ),
       ),
     );
   }
+}
+
+Widget _buildItemBarView(String name) {
+  return new SafeArea(child: new Builder(
+    builder: (BuildContext context) {
+      return new CustomScrollView(
+        key: new PageStorageKey<String>(name),
+        slivers: <Widget>[
+          new SliverFixedExtentList(
+            delegate: new SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+              return new ListTile(
+                title: new Text('Item $name'),
+              );
+            },childCount: 15),
+          ),
+        ],
+      );
+    },),
+  );
 }
 
 /** 广告组件 */
