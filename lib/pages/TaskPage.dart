@@ -19,6 +19,13 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new NestedScrollView(
@@ -42,20 +49,26 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
               pinned: true,
             ),
             new SliverPersistentHeader(
-              delegate: new _SliverAppBarDelegate(new TabBar(
-                  controller: _tabController,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicatorWeight: 3.0,
-                  indicatorColor: StudentColors.tabTextSelectedColor,
-                  labelColor: StudentColors.s_484848,
-                  unselectedLabelColor: StudentColors.s_9a9a9a,
-                  tabs: _tabs.map((name) {
-                    return new Tab(
-                      text: name,
-                    );
-                  }).toList())),
-              pinned: true,
-            ),
+              delegate: new _SliverAppBarDelegate(
+                builder: (BuildContext context) {
+                  return new Container(
+                    color: Colors.white,
+                    child: new TabBar(
+                        controller: _tabController,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicatorWeight: 3.0,
+                        indicatorColor: StudentColors.tabTextSelectedColor,
+                        labelColor: StudentColors.s_484848,
+                        unselectedLabelColor: StudentColors.s_9a9a9a,
+                        tabs: _tabs.map((name) {
+                          return new Tab(
+                            text: name,
+                          );
+                        }).toList()),
+                  );
+                },
+              ),
+            pinned: true,),
 //            new Divider(height: 1.0,color: StudentColors.s_f6f6f6,),
           ];
         },
@@ -71,22 +84,13 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
 }
 
 Widget _buildItemBarView(String name) {
-  return new SafeArea(child: new Builder(
-    builder: (BuildContext context) {
-      return new CustomScrollView(
-        key: new PageStorageKey<String>(name),
-        slivers: <Widget>[
-          new SliverFixedExtentList(
-            delegate: new SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return new ListTile(
-                title: new Text('Item $name'),
-              );
-            },childCount: 15),
-          ),
-        ],
+  return new ListView.builder(
+    itemBuilder: (BuildContext context, int index) {
+      return new ListTile(
+        title: new Text(name),
       );
-    },),
+    },
+    itemCount: 10,
   );
 }
 
@@ -104,18 +108,10 @@ Widget _banner() {
 BannerView _bannerView() {
   return new BannerView(
     [
-      // new Card(shape: new RoundedRectangleBorder(
-      //               borderRadius: new BorderRadius.circular(4.0)),child:  new Image.asset("images/homepage_banner_ad1.png",fit: BoxFit.fill,),),
-      // new Card(shape: new RoundedRectangleBorder(
-      //               borderRadius: new BorderRadius.circular(4.0)),child:  new Image.asset("images/homepage_banner_ad2.png",fit: BoxFit.fill,),),
-      // new Card(shape: new RoundedRectangleBorder(
-      //               borderRadius: new BorderRadius.circular(4.0)),child:  new Image.asset("images/homepage_banner_ad1.png",fit: BoxFit.fill,),),
-
       new Image.asset(
         "images/task_banner_ad1.png",
         fit: BoxFit.fill,
       ),
-
       new Image.asset(
         "images/task_banner_ad2.png",
         fit: BoxFit.fill,
@@ -161,21 +157,21 @@ BannerView _bannerView() {
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
+  _SliverAppBarDelegate({this.builder}) : assert(builder != null);
 
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
+  WidgetBuilder builder;
 
   @override
-  double get maxExtent => _tabBar.preferredSize.height;
+  double get minExtent => 46.0;
+
+  @override
+  double get maxExtent => 46.0;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
-      child: _tabBar,
+      child: builder(context),
     );
   }
 
