@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:banner_view/banner_view.dart';
 import 'package:studentapp/colors/StudentColors.dart';
-
+import 'package:studentapp/pages/TaskItemPage.dart';
 class TaskPage extends StatefulWidget {
   @override
   _TaskPageState createState() => _TaskPageState();
@@ -68,13 +68,14 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
                   );
                 },
               ),
-            pinned: true,),
+              pinned: true,
+            ),
 //            new Divider(height: 1.0,color: StudentColors.s_f6f6f6,),
           ];
         },
         body: new TabBarView(
           children: _tabs.map((name) {
-            return _buildItemBarView(name);
+            return new TaskItemPage(name: name);
           }).toList(),
           controller: _tabController,
         ),

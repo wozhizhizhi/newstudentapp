@@ -598,6 +598,8 @@ class _ReadPageState extends State<ReadPage> {
                             ),
                           ],
                         ),
+
+                        new Container(width: 2.0,height: 52.0,color: StudentColors.s_f2f1f1,margin: const EdgeInsets.only(left: 9.0 , right: 6.0),),
                         new Container(
                           padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                           child: new Column(
