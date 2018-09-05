@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studentapp/colors/StudentColors.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:banner_view/banner_view.dart';
+import 'ReadMessage.dart';
 
 class ReadPage extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _ReadPageState extends State<ReadPage> {
               rankKey: 'completed',
             ),
             new CircularSegmentEntry(
-              20.0,
+              100.0,
               Color(0xff4a7bbb),
               rankKey: 'remaining',
             ),
@@ -525,7 +526,7 @@ class _ReadPageState extends State<ReadPage> {
           ),
           new ListView(
             children: <Widget>[
-              new Stack(
+             new GestureDetector(child: new Stack(
                 children: <Widget>[
                   /// 顶部的内容
                   new Opacity(
@@ -621,7 +622,11 @@ class _ReadPageState extends State<ReadPage> {
                     ),
                   ),
                 ],
-              ),
+              ),onTap: (){
+                  Navigator.push(context, new MaterialPageRoute(builder: (context){
+                    return new ReadMessage();
+                  }));
+             },),
 
               /// 阅读的图形圆圈加字体
               new Stack(

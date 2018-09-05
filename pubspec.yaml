@@ -57,6 +57,9 @@ flutter:
     - images/task_banner_ad1.png
     - images/task_banner_ad2.png
     - images/task_banner_ad3.png
+    - images/footprints_img_top.png
+    - images/btn_back_yellow.png
+    - images/reading information_img_bg.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

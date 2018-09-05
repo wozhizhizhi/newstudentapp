@@ -85,14 +85,17 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
 }
 
 Widget _buildItemBarView(String name) {
-  return new ListView.builder(
-    itemBuilder: (BuildContext context, int index) {
-      return new ListTile(
-        title: new Text(name),
-      );
-    },
-    itemCount: 10,
-  );
+  return new Container(color: Colors.white,width: 49.0,child: new Row(children: <Widget>[
+
+  ],),);
+//    new ListView.builder(
+//    itemBuilder: (BuildContext context, int index) {
+//      return new ListTile(
+//        title: new Text(name),
+//      );
+//    },
+//    itemCount: 10,
+//  );
 }
 
 /** 广告组件 */
