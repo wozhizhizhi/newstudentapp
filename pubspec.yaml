@@ -50,16 +50,32 @@ flutter:
     - images/homepage_banner_ad1.png
     - images/homepage_banner_ad2.png
     - images/homepage_banner_ad3.png
-    - images/icon_Lv1.png
-    - images/icon_Lv2.png
-    - images/icon_Lv3.png
-    - images/icon_Lv4.png
     - images/task_banner_ad1.png
     - images/task_banner_ad2.png
     - images/task_banner_ad3.png
     - images/footprints_img_top.png
     - images/btn_back_yellow.png
     - images/reading information_img_bg.png
+    - images/task_bg.png
+    - images/task_btn_return.png
+    - images/task_icon_reading.png
+    - images/task_icon_writting.png
+    - images/icon_lv1.png
+    - images/icon_lv2.png
+    - images/icon_lv3.png
+    - images/icon_lv4.png
+    - images/icon_lv5.png
+    - images/icon_lv6.png
+    - images/icon_lv7.png
+    - images/icon_lv8.png
+    - images/icon_lv9.png
+    - images/icon_integration.png
+    - images/medalswall_img_bg.png
+    - images/medalswall_icon_7days.png
+    - images/medalswall_icon_21days.png
+    - images/medalswall_icon_100days.png
+    - images/medalswall_icon_arrow.png
+    - images/medalswall_icon_fan.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

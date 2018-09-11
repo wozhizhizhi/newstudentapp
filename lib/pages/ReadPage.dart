@@ -512,21 +512,19 @@ class _ReadPageState extends State<ReadPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Stack(
-        children: <Widget>[
-          new Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  image: new AssetImage(
-                    "images/homepage_bg_top.png",
-                  ),
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.topCenter),
-            ),
-          ),
-          new ListView(
-            children: <Widget>[
-             new GestureDetector(child: new Stack(
+      body: new Container(
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+              image: new AssetImage(
+                "images/homepage_bg_top.png",
+              ),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter),
+        ),
+        child: new ListView(
+          children: <Widget>[
+            new GestureDetector(
+              child: new Stack(
                 children: <Widget>[
                   /// 顶部的内容
                   new Opacity(
@@ -599,8 +597,12 @@ class _ReadPageState extends State<ReadPage> {
                             ),
                           ],
                         ),
-
-                        new Container(width: 2.0,height: 52.0,color: StudentColors.s_f2f1f1,margin: const EdgeInsets.only(left: 9.0 , right: 6.0),),
+                        new Container(
+                          width: 2.0,
+                          height: 52.0,
+                          color: StudentColors.s_f2f1f1,
+                          margin: const EdgeInsets.only(left: 9.0, right: 6.0),
+                        ),
                         new Container(
                           padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                           child: new Column(
@@ -622,117 +624,119 @@ class _ReadPageState extends State<ReadPage> {
                     ),
                   ),
                 ],
-              ),onTap: (){
-                  Navigator.push(context, new MaterialPageRoute(builder: (context){
-                    return new ReadMessage();
-                  }));
-             },),
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return new ReadMessage();
+                }));
+              },
+            ),
 
-              /// 阅读的图形圆圈加字体
-              new Stack(
-                alignment: Alignment.topCenter,
-                children: <Widget>[
-                  _buildCircularChart(),
-                  new Container(
-                    width: 115.0,
-                    height: 115.0,
-                    child: new Column(
-                      children: <Widget>[
-                        new Container(
-                          child: new Text(
-                            "今日阅读",
-                            style: new TextStyle(
-                                color: Colors.white, fontSize: 12.0),
-                          ),
-                          padding: const EdgeInsets.only(top: 28.5),
+            /// 阅读的图形圆圈加字体
+            new Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                _buildCircularChart(),
+                new Container(
+                  width: 115.0,
+                  height: 115.0,
+                  child: new Column(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text(
+                          "今日阅读",
+                          style: new TextStyle(
+                              color: Colors.white, fontSize: 12.0),
                         ),
-                        new Container(
-                          child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              new Text(
-                                "25",
+                        padding: const EdgeInsets.only(top: 28.5),
+                      ),
+                      new Container(
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Text(
+                              "25",
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: 32.0,
+                              ),
+                            ),
+                            new Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: new Text(
+                                "分钟",
                                 style: new TextStyle(
                                   color: Colors.white,
-                                  fontSize: 32.0,
+                                  fontSize: 11.0,
                                 ),
                               ),
-                              new Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: new Text(
-                                  "分钟",
-                                  style: new TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-
-              /// 去记录按钮
-              new Container(
-                width: 180.0,
-                height: 40.0,
-                child: new RaisedButton(
-                  onPressed: null,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0)),
-                  disabledColor: const Color(0xfffde925),
-                  highlightColor: const Color(0xffffd72c),
-                  splashColor: const Color(0xfff4c925),
-                  child: new Text(
-                    "去记录",
-                    style: new TextStyle(color: Colors.white, fontSize: 18.0),
-                  ),
-                ),
-                margin: const EdgeInsets.only(right: 100.0, left: 100.0),
-              ),
-
-              /// 阅读量时长和天数控件
-              _buildLineWidget(),
-
-              /// 下滑线
-              new Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: new Divider(
-                  height: 0.2,
-                  color: StudentColors.s_999999,
-                ),
-              ),
-
-              /// 每天30分钟
-              new Container(
-                color: Colors.white,
-                child: new Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      new Text(
-                        "每天30分钟，目标已达成2天",
-                        style: new TextStyle(
-                          fontSize: 14.0,
-                          color: StudentColors.s_666666,
+                            ),
+                          ],
                         ),
-                      ),
-                      timeWidget,
+                      )
                     ],
                   ),
+                )
+              ],
+            ),
+
+            /// 去记录按钮
+            new Container(
+              width: 180.0,
+              height: 40.0,
+              child: new RaisedButton(
+                onPressed: null,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
+                disabledColor: const Color(0xfffde925),
+                highlightColor: const Color(0xffffd72c),
+                splashColor: const Color(0xfff4c925),
+                child: new Text(
+                  "去记录",
+                  style: new TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ),
-              classWall(),
-              _privateWedgit(),
-              _banner(),
-            ],
-          ),
-        ],
+              margin: const EdgeInsets.only(right: 100.0, left: 100.0),
+            ),
+
+            /// 阅读量时长和天数控件
+            _buildLineWidget(),
+
+            /// 下滑线
+            new Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              child: new Divider(
+                height: 0.2,
+                color: StudentColors.s_999999,
+              ),
+            ),
+
+            /// 每天30分钟
+            new Container(
+              color: Colors.white,
+              child: new Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(
+                      "每天30分钟，目标已达成2天",
+                      style: new TextStyle(
+                        fontSize: 14.0,
+                        color: StudentColors.s_666666,
+                      ),
+                    ),
+                    timeWidget,
+                  ],
+                ),
+              ),
+            ),
+            classWall(),
+            _privateWedgit(),
+            _banner(),
+          ],
+        ),
       ),
     );
   }
