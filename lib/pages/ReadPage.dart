@@ -630,6 +630,25 @@ class _ReadPageState extends State<ReadPage> {
                     new MaterialPageRoute(builder: (context) {
                   return new ReadMessage();
                 }));
+
+//                Navigator.push(
+//                    context,
+//                    new PageRouteBuilder(
+//                        opaque: false,
+//                        pageBuilder: (BuildContext context, _, __) {
+//                          return new ReadMessage();
+//                        },
+//                        transitionsBuilder: (___, Animation<double> animation,
+//                            ____, Widget child) {
+//                          return new FadeTransition(
+//                            opacity: animation,
+//                            child: new RotationTransition(
+//                              turns: new Tween<double>(begin: 0.5, end: 1.0)
+//                                  .animate(animation),
+//                              child: child,
+//                            ),
+//                          );
+//                        }));
               },
             ),
 

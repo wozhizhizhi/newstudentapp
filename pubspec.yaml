@@ -76,6 +76,7 @@ flutter:
     - images/medalswall_icon_100days.png
     - images/medalswall_icon_arrow.png
     - images/medalswall_icon_fan.png
+    - images/readinginformation_icon_doctor.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
