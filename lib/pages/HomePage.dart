@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:studentapp/colors/StudentColors.dart';
 import 'package:studentapp/pages/ReadCirclePage.dart';
-import 'package:studentapp/pages/ReadPage.dart';
 import 'package:studentapp/pages/TaskPage.dart';
 import 'package:studentapp/pages/UserPage.dart';
+import 'package:studentapp/pages/ReadPage.dart';
 
 class HomePage extends StatefulWidget {
   @override

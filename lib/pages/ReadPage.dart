@@ -6,18 +6,278 @@ import 'ReadMessage.dart';
 
 class ReadPage extends StatefulWidget {
   @override
-  _ReadPageState createState() => _ReadPageState();
+  _ReadPageState createState() => new _ReadPageState();
 }
 
 class _ReadPageState extends State<ReadPage> {
   String url = "";
   final _chartSize = const Size(115.0, 115.0);
   final GlobalKey<AnimatedCircularChartState> _chartKey =
-      new GlobalKey<AnimatedCircularChartState>();
+  new GlobalKey<AnimatedCircularChartState>();
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: new SingleChildScrollView(
+        child: new Column(
+          children: <Widget>[
+            new Stack(children: <Widget>[
+              _buildTitle(),
+
+              /// 阅读量时长和天数控件
+              _buildLineWidget(),
+            ],),
+
+            /// 下滑线
+            new Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              child: new Divider(
+                height: 0.2,
+                color: StudentColors.s_999999,
+              ),
+            ),
+
+            /// 每天30分钟
+            new Container(
+              color: Colors.white,
+              child: new Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(
+                      "每天30分钟，目标已达成2天",
+                      style: new TextStyle(
+                        fontSize: 14.0,
+                        color: StudentColors.s_666666,
+                      ),
+                    ),
+                    timeWidget,
+                  ],
+                ),
+              ),
+            ),
+
+            classWall(),
+            _privateWedgit(),
+            _banner(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 首页头部
+  Widget _buildTitle() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+            image: new AssetImage(
+              "images/homepage_bg_top.png",
+            ),
+            fit: BoxFit.fill),
+      ),
+      child: new Container(margin: const EdgeInsets.only(top: 25.0),
+        child: new Column(
+          children: <Widget>[
+            new GestureDetector(
+              child: new Stack(
+                children: <Widget>[
+                  /// 顶部的内容
+                  new Opacity(
+                    opacity: 0.2,
+                    child: Container(
+                      height: 75.0,
+                      margin: const EdgeInsets.only(right: 7.0, left: 7.0),
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: new BorderRadius.circular(12.0)),
+                    ),
+                  ),
+
+                  new Container(
+                    margin: const EdgeInsets.only(right: 7.0, left: 7.0),
+                    height: 75.0,
+                    child: Row(
+                      children: <Widget>[
+                        new Container(
+                          margin: const EdgeInsets.only(left: 12.0),
+                          decoration: new BoxDecoration(
+                            borderRadius: new BorderRadius.circular(50.0),
+                            border:
+                                new Border.all(color: Colors.white, width: 2.0),
+                          ),
+                          width: 50.0,
+                          height: 50.0,
+                          child: new CircleAvatar(
+                            backgroundImage: url != ""
+                                ? new NetworkImage(url)
+                                : new AssetImage(
+                                    "images/defaul_head_parent.png"),
+                          ),
+                        ),
+                        new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Container(
+                              padding:
+                                  const EdgeInsets.only(top: 12.0, left: 12.0),
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text(
+                                    "陈明明",
+                                    style: new TextStyle(
+                                        fontSize: 18.0, color: Colors.white),
+                                  ),
+                                  new Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 4.5, top: 4.5),
+                                      child: new Image.asset(
+                                        "images/icon_lv3.png",
+                                        width: 22.0,
+                                        height: 9.0,
+                                      )),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 200.0,
+                              padding:
+                                  const EdgeInsets.only(top: 5.0, left: 12.0),
+                              child: new Text(
+                                "深圳市罗湖地区东路小学（天伦校区） 二年级2班",
+                                style: new TextStyle(
+                                    color: Colors.white, fontSize: 11.0),
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ),
+                        new Container(
+                          width: 2.0,
+                          height: 52.0,
+                          color: StudentColors.s_f2f1f1,
+                          margin: const EdgeInsets.only(left: 9.0, right: 6.0),
+                        ),
+                        new Container(
+                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                          child: new Column(
+                            children: <Widget>[
+                              new Text(
+                                "第一学期",
+                                style: new TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                              new Text(
+                                "第5周",
+                                style: new TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return new ReadMessage();
+                }));
+
+//                Navigator.push(
+//                    context,
+//                    new PageRouteBuilder(
+//                        opaque: false,
+//                        pageBuilder: (BuildContext context, _, __) {
+//                          return new ReadMessage();
+//                        },
+//                        transitionsBuilder: (___, Animation<double> animation,
+//                            ____, Widget child) {
+//                          return new FadeTransition(
+//                            opacity: animation,
+//                            child: new RotationTransition(
+//                              turns: new Tween<double>(begin: 0.5, end: 1.0)
+//                                  .animate(animation),
+//                              child: child,
+//                            ),
+//                          );
+//                        }));
+              },
+            ),
+
+            /// 阅读的图形圆圈加字体
+            new Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                _buildCircularChart(),
+                new Container(
+                  width: 115.0,
+                  height: 115.0,
+                  child: new Column(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text(
+                          "今日阅读",
+                          style: new TextStyle(
+                              color: Colors.white, fontSize: 12.0),
+                        ),
+                        padding: const EdgeInsets.only(top: 28.5),
+                      ),
+                      new Container(
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Text(
+                              "25",
+                              style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: 32.0,
+                              ),
+                            ),
+                            new Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: new Text(
+                                "分钟",
+                                style: new TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+
+            /// 去记录按钮
+            new Container(
+              width: 180.0,
+              height: 40.0,
+              child: new RaisedButton(
+                onPressed: null,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
+                disabledColor: const Color(0xfffde925),
+                highlightColor: const Color(0xffffd72c),
+                splashColor: const Color(0xfff4c925),
+                child: new Text(
+                  "去记录",
+                  style: new TextStyle(color: Colors.white, fontSize: 18.0),
+                ),
+              ),
+              margin: const EdgeInsets.only(right: 100.0, left: 100.0,top: 19.0,bottom: 30.0),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   /// 阅读的图形圆圈
@@ -62,7 +322,7 @@ class _ReadPageState extends State<ReadPage> {
             fit: BoxFit.fitWidth,
             alignment: Alignment.topCenter),
       ),
-      margin: const EdgeInsets.only(top: 43.0),
+      margin: const EdgeInsets.only(top: 290.0),
       height: 80.0,
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -168,96 +428,96 @@ class _ReadPageState extends State<ReadPage> {
   /// 星期的控价
   var timeWidget = new LayoutBuilder(
     builder: (BuildContext context, BoxConstraints viewportConstraints) {
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: new ConstrainedBox(
-          constraints: new BoxConstraints(
-            minWidth: viewportConstraints.maxWidth,
+      return
+//        SingleChildScrollView(
+//        scrollDirection: Axis.horizontal,
+//        child: new ConstrainedBox(
+//          constraints: new BoxConstraints(
+//            minWidth: viewportConstraints.maxWidth,
+//          ),
+//          child:
+        new IntrinsicWidth(
+          child: new Row(
+            children: <Widget>[
+              new Container(
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: StudentColors.s_f6f6f6,
+                  ),
+                  width: 39.0,
+                  height: 39.0,
+                  child: new Text("10"),
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 13.0)),
+              new Container(
+                child: new Image.asset(
+                  "images/homepage_icon_pass.png",
+                  width: 39.0,
+                  height: 39.0,
+                ),
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+              ),
+              new Container(
+                child: new Image.asset(
+                  "images/homepage_icon_pass.png",
+                  width: 39.0,
+                  height: 39.0,
+                ),
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+              ),
+              new Container(
+                child: new Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    new Image.asset(
+                      "images/homepage_icon_today.png",
+                      width: 39.0,
+                      height: 39.0,
+                    ),
+                    new Text(
+                      "四",
+                      style: new TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+              ),
+              new Container(
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: StudentColors.s_f6f6f6,
+                  ),
+                  width: 39.0,
+                  height: 39.0,
+                  child: new Text("五"),
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
+              new Container(
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: StudentColors.s_f6f6f6,
+                  ),
+                  width: 39.0,
+                  height: 39.0,
+                  child: new Text("六"),
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 13.0, left:9.0)),
+              new Container(
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: StudentColors.s_f6f6f6,
+                  ),
+                  width: 39.0,
+                  height: 39.0,
+                  child: new Text("日"),
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
+            ],
           ),
-          child: new IntrinsicWidth(
-            child: new Row(
-              children: <Widget>[
-                new Container(
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: StudentColors.s_f6f6f6,
-                    ),
-                    width: 39.0,
-                    height: 39.0,
-                    child: new Text("10"),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 13.0)),
-                new Container(
-                  child: new Image.asset(
-                    "images/homepage_icon_pass.png",
-                    width: 39.0,
-                    height: 39.0,
-                  ),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left: 13.0),
-                ),
-                new Container(
-                  child: new Image.asset(
-                    "images/homepage_icon_pass.png",
-                    width: 39.0,
-                    height: 39.0,
-                  ),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left: 13.0),
-                ),
-                new Container(
-                  child: new Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      new Image.asset(
-                        "images/homepage_icon_today.png",
-                        width: 39.0,
-                        height: 39.0,
-                      ),
-                      new Text(
-                        "四",
-                        style: new TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left: 13.0),
-                ),
-                new Container(
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: StudentColors.s_f6f6f6,
-                    ),
-                    width: 39.0,
-                    height: 39.0,
-                    child: new Text("五"),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 13.0, left: 13.0)),
-                new Container(
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: StudentColors.s_f6f6f6,
-                    ),
-                    width: 39.0,
-                    height: 39.0,
-                    child: new Text("六"),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 13.0, left: 13.0)),
-                new Container(
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: StudentColors.s_f6f6f6,
-                    ),
-                    width: 39.0,
-                    height: 39.0,
-                    child: new Text("日"),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 13.0, left: 13.0)),
-              ],
-            ),
-          ),
-        ),
-      );
+        );
     },
   );
 
@@ -273,7 +533,7 @@ class _ReadPageState extends State<ReadPage> {
             child: new Text(
               "班级阅读墙",
               style:
-                  new TextStyle(color: StudentColors.s_666666, fontSize: 14.0),
+              new TextStyle(color: StudentColors.s_666666, fontSize: 14.0),
             ),
             padding: const EdgeInsets.only(top: 14.0, left: 15.0),
           ),
@@ -424,7 +684,7 @@ class _ReadPageState extends State<ReadPage> {
               height: 16.0,
             ),
             padding:
-                const EdgeInsets.only(right: 15.0, top: 15.0, bottom: 15.0),
+            const EdgeInsets.only(right: 15.0, top: 15.0, bottom: 15.0),
           ),
         ],
       ),
@@ -460,19 +720,19 @@ class _ReadPageState extends State<ReadPage> {
 
         new Card(
             child: new Image.asset(
-          "images/homepage_banner_ad1.png",
-          fit: BoxFit.fill,
-        )),
+              "images/homepage_banner_ad1.png",
+              fit: BoxFit.fill,
+            )),
         new Card(
             child: new Image.asset(
-          "images/homepage_banner_ad2.png",
-          fit: BoxFit.fill,
-        )),
+              "images/homepage_banner_ad2.png",
+              fit: BoxFit.fill,
+            )),
         new Card(
             child: new Image.asset(
-          "images/homepage_banner_ad3.png",
-          fit: BoxFit.fill,
-        )),
+              "images/homepage_banner_ad3.png",
+              fit: BoxFit.fill,
+            )),
       ],
       log: false,
       indicatorMargin: 4.0,
@@ -506,257 +766,6 @@ class _ReadPageState extends State<ReadPage> {
         );
         return cc;
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-              image: new AssetImage(
-                "images/homepage_bg_top.png",
-              ),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter),
-        ),
-        child: new ListView(
-          children: <Widget>[
-            new GestureDetector(
-              child: new Stack(
-                children: <Widget>[
-                  /// 顶部的内容
-                  new Opacity(
-                    opacity: 0.2,
-                    child: Container(
-                      height: 75.0,
-                      margin: const EdgeInsets.only(right: 7.0, left: 7.0),
-                      decoration: new BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: new BorderRadius.circular(12.0)),
-                    ),
-                  ),
-
-                  new Container(
-                    margin: const EdgeInsets.only(right: 7.0, left: 7.0),
-                    height: 75.0,
-                    child: Row(
-                      children: <Widget>[
-                        new Container(
-                          margin: const EdgeInsets.only(left: 12.0),
-                          decoration: new BoxDecoration(
-                            borderRadius: new BorderRadius.circular(50.0),
-                            border:
-                                new Border.all(color: Colors.white, width: 2.0),
-                          ),
-                          width: 50.0,
-                          height: 50.0,
-                          child: new CircleAvatar(
-                            backgroundImage: url != ""
-                                ? new NetworkImage(url)
-                                : new AssetImage(
-                                    "images/defaul_head_parent.png"),
-                          ),
-                        ),
-                        new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            new Container(
-                              padding:
-                                  const EdgeInsets.only(top: 12.0, left: 12.0),
-                              child: new Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text(
-                                    "陈明明",
-                                    style: new TextStyle(
-                                        fontSize: 18.0, color: Colors.white),
-                                  ),
-                                  new Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 4.5, top: 4.5),
-                                      child: new Image.asset(
-                                        "images/icon_Lv3.png",
-                                        width: 22.0,
-                                        height: 9.0,
-                                      )),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 200.0,
-                              padding:
-                                  const EdgeInsets.only(top: 5.0, left: 12.0),
-                              child: new Text(
-                                "深圳市罗湖地区东路小学（天伦校区） 二年级2班",
-                                style: new TextStyle(
-                                    color: Colors.white, fontSize: 11.0),
-                                softWrap: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                        new Container(
-                          width: 2.0,
-                          height: 52.0,
-                          color: StudentColors.s_f2f1f1,
-                          margin: const EdgeInsets.only(left: 9.0, right: 6.0),
-                        ),
-                        new Container(
-                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
-                          child: new Column(
-                            children: <Widget>[
-                              new Text(
-                                "第一学期",
-                                style: new TextStyle(
-                                    color: Colors.white, fontSize: 12.0),
-                              ),
-                              new Text(
-                                "第5周",
-                                style: new TextStyle(
-                                    color: Colors.white, fontSize: 18.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              onTap: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  return new ReadMessage();
-                }));
-
-//                Navigator.push(
-//                    context,
-//                    new PageRouteBuilder(
-//                        opaque: false,
-//                        pageBuilder: (BuildContext context, _, __) {
-//                          return new ReadMessage();
-//                        },
-//                        transitionsBuilder: (___, Animation<double> animation,
-//                            ____, Widget child) {
-//                          return new FadeTransition(
-//                            opacity: animation,
-//                            child: new RotationTransition(
-//                              turns: new Tween<double>(begin: 0.5, end: 1.0)
-//                                  .animate(animation),
-//                              child: child,
-//                            ),
-//                          );
-//                        }));
-              },
-            ),
-
-            /// 阅读的图形圆圈加字体
-            new Stack(
-              alignment: Alignment.topCenter,
-              children: <Widget>[
-                _buildCircularChart(),
-                new Container(
-                  width: 115.0,
-                  height: 115.0,
-                  child: new Column(
-                    children: <Widget>[
-                      new Container(
-                        child: new Text(
-                          "今日阅读",
-                          style: new TextStyle(
-                              color: Colors.white, fontSize: 12.0),
-                        ),
-                        padding: const EdgeInsets.only(top: 28.5),
-                      ),
-                      new Container(
-                        child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            new Text(
-                              "25",
-                              style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 32.0,
-                              ),
-                            ),
-                            new Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: new Text(
-                                "分钟",
-                                style: new TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-
-            /// 去记录按钮
-            new Container(
-              width: 180.0,
-              height: 40.0,
-              child: new RaisedButton(
-                onPressed: null,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-                disabledColor: const Color(0xfffde925),
-                highlightColor: const Color(0xffffd72c),
-                splashColor: const Color(0xfff4c925),
-                child: new Text(
-                  "去记录",
-                  style: new TextStyle(color: Colors.white, fontSize: 18.0),
-                ),
-              ),
-              margin: const EdgeInsets.only(right: 100.0, left: 100.0),
-            ),
-
-            /// 阅读量时长和天数控件
-            _buildLineWidget(),
-
-            /// 下滑线
-            new Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-              child: new Divider(
-                height: 0.2,
-                color: StudentColors.s_999999,
-              ),
-            ),
-
-            /// 每天30分钟
-            new Container(
-              color: Colors.white,
-              child: new Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Text(
-                      "每天30分钟，目标已达成2天",
-                      style: new TextStyle(
-                        fontSize: 14.0,
-                        color: StudentColors.s_666666,
-                      ),
-                    ),
-                    timeWidget,
-                  ],
-                ),
-              ),
-            ),
-            classWall(),
-            _privateWedgit(),
-            _banner(),
-          ],
-        ),
-      ),
     );
   }
 }

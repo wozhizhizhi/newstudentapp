@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:banner_view/banner_view.dart';
 import 'package:studentapp/colors/StudentColors.dart';
 import 'package:studentapp/pages/TaskItemPage.dart';
+
 class TaskPage extends StatefulWidget {
   @override
   _TaskPageState createState() => _TaskPageState();
@@ -9,20 +10,31 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
   List<String> _tabs = ["语文", "数学", "英语", "美术", "音乐", "体育"];
+  List<String> _buttonTabs = ["全部", "项目式学习", "同课研读"];
   TabController _tabController;
+  PageController _pageController;
+  int _curIndex = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = new TabController(length: _tabs.length, vsync: this);
+    _pageController = new PageController(initialPage: _curIndex);
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _pageController?.dispose();
     // TODO: implement dispose
     super.dispose();
+  }
+
+  /// PageView中onPageChanged代表页面改变的时候
+  pageChanged(int index) {
+    _curIndex = index;
+    setState(() {});
   }
 
   @override
@@ -32,6 +44,7 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             new SliverAppBar(
+              elevation: 0.0,
               title: new Text(
                 "我的任务",
                 style: new TextStyle(
@@ -75,89 +88,147 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
         },
         body: new TabBarView(
           children: _tabs.map((name) {
-            return new TaskItemPage(name: name);
+            return _buildTabview();
           }).toList(),
           controller: _tabController,
         ),
       ),
     );
   }
-}
 
-Widget _buildItemBarView(String name) {
-  return new Container(color: Colors.white,width: 49.0,child: new Row(children: <Widget>[
+  Widget _buildItemBarView() {
+    return new ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return new ListTile(subtitle: new Text("我的"),
+          leading: new Icon(Icons.title),
+          title: new Text("今天天气很好"),
+        );
+      },
+      itemCount: 10,
+    );
+  }
 
-  ],),);
-//    new ListView.builder(
-//    itemBuilder: (BuildContext context, int index) {
-//      return new ListTile(
-//        title: new Text(name),
-//      );
-//    },
-//    itemCount: 10,
-//  );
-}
+  Widget _buildTabview() {
+    return new Container(
+      child: new Column(
+        children: <Widget>[
+          new Divider(
+            height: 1.0,
+            color: StudentColors.s_f6f6f6,
+          ),
+          new Container(
+            height: 49.0,
+            color: Colors.white,
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new InkWell(
+                  child: new Container(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: new Text(
+                      _buttonTabs[0],
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ),
+                ),
+                new InkWell(
+                  child: new Container(
+                    child: new Text(
+                      _buttonTabs[1],
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ),
+                ),
+                new InkWell(
+                  child: new Container(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: new Text(
+                      _buttonTabs[2],
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          new Expanded(
+            child: new Container(child: new PageView.builder(
+              // 禁止滑动
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                _buildItemBarView();
+              },
+              onPageChanged: pageChanged,
+              controller: _pageController,
+              itemCount: _buttonTabs.length,
+            ),),
+          ),
+        ],
+      ),
+    );
+  }
 
-/** 广告组件 */
-Widget _banner() {
-  return new Container(
-    height: 156.0,
+  /** 广告组件 */
+  Widget _banner() {
+    return new Container(
+      height: 156.0,
 //        decoration: new ShapeDecoration(
 //            shape: new RoundedRectangleBorder(
 //                borderRadius: new BorderRadius.circular(15.0))),
-    child: _bannerView(),
-  );
-}
+      child: _bannerView(),
+    );
+  }
 
-BannerView _bannerView() {
-  return new BannerView(
-    [
-      new Image.asset(
-        "images/task_banner_ad1.png",
-        fit: BoxFit.fill,
-      ),
-      new Image.asset(
-        "images/task_banner_ad2.png",
-        fit: BoxFit.fill,
-      ),
-      new Image.asset(
-        "images/task_banner_ad3.png",
-        fit: BoxFit.fill,
-      ),
-    ],
-    log: false,
-    indicatorMargin: 4.0,
-    indicatorNormal: new Container(
-      width: 5.0,
-      height: 5.0,
-      decoration: new BoxDecoration(
-        color: StudentColors.s_d1d1d1,
-        shape: BoxShape.circle,
-      ),
-    ),
-    indicatorSelected: new Container(
-      width: 5.0,
-      height: 5.0,
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-      ),
-    ),
-    indicatorBuilder: (context, indicator) {
-      Widget cc = new Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 2.0),
-          alignment: Alignment.center,
-          height: 15.0,
-          width: double.infinity,
-          color: Colors.transparent,
-          child: indicator,
+  BannerView _bannerView() {
+    return new BannerView(
+      [
+        new Image.asset(
+          "images/task_banner_ad1.png",
+          fit: BoxFit.fill,
         ),
-      );
-      return cc;
-    },
-  );
+        new Image.asset(
+          "images/task_banner_ad2.png",
+          fit: BoxFit.fill,
+        ),
+        new Image.asset(
+          "images/task_banner_ad3.png",
+          fit: BoxFit.fill,
+        ),
+      ],
+      log: false,
+      indicatorMargin: 4.0,
+      indicatorNormal: new Container(
+        width: 5.0,
+        height: 5.0,
+        decoration: new BoxDecoration(
+          color: StudentColors.s_d1d1d1,
+          shape: BoxShape.circle,
+        ),
+      ),
+      indicatorSelected: new Container(
+        width: 5.0,
+        height: 5.0,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+      ),
+      indicatorBuilder: (context, indicator) {
+        Widget cc = new Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 2.0),
+            alignment: Alignment.center,
+            height: 15.0,
+            width: double.infinity,
+            color: Colors.transparent,
+            child: indicator,
+          ),
+        );
+        return cc;
+      },
+    );
+  }
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {

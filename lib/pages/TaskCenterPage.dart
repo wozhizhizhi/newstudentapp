@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
  * 任务中心
  */
 class TaskCenterPage extends StatefulWidget {
-  static const String sName = "/taskcenterpage";
   @override
   _TaskCenterPagePageState createState() => new _TaskCenterPagePageState();
 }

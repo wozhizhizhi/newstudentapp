@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(theme: new ThemeData(primaryColor: Colors.white),
       routes: <String, WidgetBuilder>{
-        TaskCenterPage.sName: (BuildContext context) => new TaskCenterPage(),
+        "/taskcenterpage": (BuildContext context) => new TaskCenterPage(),
       },
       home: new HomePage(),
     );
