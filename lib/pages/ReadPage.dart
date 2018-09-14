@@ -541,7 +541,7 @@ class _ReadPageState extends State<ReadPage> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                new Column(
+                new InkWell(child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     new Row(
@@ -575,7 +575,9 @@ class _ReadPageState extends State<ReadPage> {
                       ]),
                     )
                   ],
-                ),
+                ),onTap: (){
+                  Navigator.of(context).pushNamed("/readingvolumepage");
+                },),
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[

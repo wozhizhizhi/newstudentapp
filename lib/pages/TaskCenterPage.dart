@@ -18,12 +18,27 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
   int _curIndex = 0;
   List<String> titles = ["日常任务", "特殊任务"];
 
+  // 对于真机设置状态栏透明
+//  static SystemUiOverlayStyle uiStyle = const SystemUiOverlayStyle(
+//    systemNavigationBarColor: const Color(0x00000000),
+//    systemNavigationBarDividerColor: null,
+//    statusBarColor: const Color(0x00000000),
+//    systemNavigationBarIconBrightness: Brightness.dark,
+//    statusBarIconBrightness: Brightness.dark,
+//    statusBarBrightness: Brightness.dark,
+//  );
+//
+//  static appUIStyle() {
+//    SystemChrome.setSystemUIOverlayStyle(uiStyle);
+//  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _pageController = new PageController(initialPage: _curIndex);
     _scrollController = new ScrollController();
+//    appUIStyle();
   }
 
   @override
