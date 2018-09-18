@@ -6,6 +6,8 @@ import 'pages/RedemptionCenterPage.dart';
 import 'pages/ReadingVolumePage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'pages/VolumePage.dart';
+import 'pages/ReadTimePage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -25,10 +27,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // TargetPlatform.iOS是确定的ios平台
-    return new MaterialApp(theme: new ThemeData(primaryColor: Colors.white,platform: defaultTargetPlatform==TargetPlatform.iOS?TargetPlatform.iOS:TargetPlatform.iOS),
+    return new MaterialApp(theme: new ThemeData(primaryColor: Colors.white,platform: defaultTargetPlatform==TargetPlatform.iOS?TargetPlatform.iOS:TargetPlatform.android),
       routes: <String, WidgetBuilder>{
         "/taskcenterpage": (BuildContext context) => new TaskCenterPage(),
         "/readingvolumepage": (BuildContext context) => new ReadingVolumePage(),
+        "/volumepage": (BuildContext context) => new VolumePage(),
+        "/readtimepage": (BuildContext context) => new ReadTimePage(),
       },
       home: new HomePage(),
     );

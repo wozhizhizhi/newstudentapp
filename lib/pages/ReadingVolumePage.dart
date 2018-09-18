@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/mywidget/MyAppBar.dart';
 import 'package:studentapp/colors/StudentColors.dart';
+import 'package:studentapp/pages/VolumePage.dart';
+import 'package:studentapp/pages/ReadTimePage.dart';
 
 /**
  * 阅读量的页面
  */
 class ReadingVolumePage extends StatefulWidget {
+  int pageIndex = 0;
+  ReadingVolumePage({Key key , this.pageIndex}):super(key:key);
   @override
   _ReadingVolumePageState createState() => new _ReadingVolumePageState();
 }
@@ -13,13 +17,22 @@ class ReadingVolumePage extends StatefulWidget {
 class _ReadingVolumePageState extends State<ReadingVolumePage> {
   PageController _pageController;
   int _index = 0;
-  List<String> title = ["阅读量", ""];
+  List<String> titles = ["阅读量", "阅读时长"];
+  int pageIndex = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _pageController = new PageController(initialPage: _index);
+    if (widget.pageIndex == 0){
+      _index = 0;
+
+    }
+    else if (widget.pageIndex == 1){
+      _index = 1;
+    }
+
   }
 
   @override
@@ -64,10 +77,16 @@ class _ReadingVolumePageState extends State<ReadingVolumePage> {
                     ),
                   ),
                   child: new Text(
-                    "阅读量",
+                    titles[0],
                     style: TextStyle(fontSize: 16.0, color: getSelectColor(0)),
                   ),
                 ),
+                onTap: (){
+                  setState(() {
+                    _index = 0;
+                    _pageController.animateToPage(_index, duration: new Duration(milliseconds: 300), curve: Curves.easeOut);
+                  });
+                },
               ),
               new InkWell(
                 child: Container(
@@ -84,43 +103,60 @@ class _ReadingVolumePageState extends State<ReadingVolumePage> {
                     ),
                   ),
                   child: new Text(
-                    "阅读时长",
-                    style: TextStyle(
-                        fontSize: 16.0, color: getSelectColor(1)),
+                    titles[1],
+                    style: TextStyle(fontSize: 16.0, color: getSelectColor(1)),
                   ),
                 ),
+                onTap: (){
+                  setState(() {
+                    _index = 1;
+                    _pageController.animateToPage(_index, duration: new Duration(milliseconds: 300), curve: Curves.easeOut);
+                  });
+                },
               ),
             ],
           ),
         ),
       ),
-      body: new Container(),
+      body: new PageView(
+          onPageChanged: pageChanged,
+          controller: _pageController,
+          children: <Widget>[
+            new VolumePage(),
+            new ReadTimePage(),
+          ],
+        ),
     );
   }
+
   /// 选中于未选中的文字颜色转换效果
-  Color getSelectColor(int index){
-    if (index == _index){
-        return Colors.white;
-    }
-    else{
+  Color getSelectColor(int index) {
+    if (index == _index) {
+      return Colors.white;
+    } else {
       return StudentColors.s_22b2e1;
     }
   }
 
   /// 背景色选中于未选中的效果
-  Color getBgColor(int index){
-    if (index == _index){
+  Color getBgColor(int index) {
+    if (index == _index) {
       return StudentColors.s_22b2e1;
-    }
-    else{
+    } else {
       return Colors.white;
     }
   }
-
 
   /// PageView中onPageChanged代表页面改变的时候
   pageChanged(int index) {
     _index = index;
     setState(() {});
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pageController?.dispose();
+    super.dispose();
   }
 }

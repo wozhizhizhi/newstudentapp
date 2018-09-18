@@ -3,13 +3,14 @@ import 'package:studentapp/colors/StudentColors.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:banner_view/banner_view.dart';
 import 'ReadMessage.dart';
+import 'package:studentapp/pages/ReadingVolumePage.dart';
 
 class ReadPage extends StatefulWidget {
   @override
   _ReadPageState createState() => new _ReadPageState();
 }
 
-class _ReadPageState extends State<ReadPage> {
+class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
   String url = "";
   final _chartSize = const Size(115.0, 115.0);
   final GlobalKey<AnimatedCircularChartState> _chartKey =
@@ -576,7 +577,7 @@ class _ReadPageState extends State<ReadPage> {
                     )
                   ],
                 ),onTap: (){
-                  Navigator.of(context).pushNamed("/readingvolumepage");
+                  Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new ReadingVolumePage(pageIndex: 0,)));
                 },),
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -769,5 +770,10 @@ class _ReadPageState extends State<ReadPage> {
         return cc;
       },
     );
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
   }
 }

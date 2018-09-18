@@ -319,7 +319,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
   Widget _bulidListWidget(BuildContext context, int index) {
     return new ListView.builder(
         padding: const EdgeInsets.only(top: 0.0),
-        itemCount: 10,
+        itemCount: 10*2,
         itemBuilder: (BuildContext context, int index) {
           return _buildListItem(index);
         });

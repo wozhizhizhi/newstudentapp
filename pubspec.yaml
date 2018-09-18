@@ -77,6 +77,12 @@ flutter:
     - images/medalswall_icon_arrow.png
     - images/medalswall_icon_fan.png
     - images/readinginformation_icon_doctor.png
+    - images/rank_bg_top_times.png
+    - images/rank_icon_medal_bronze.png
+    - images/rank_icon_medal_gold.png
+    - images/rank_icon_medal_sliver.png
+    - images/rank_bg_top_times.png
+    - images/rank_img_top.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
