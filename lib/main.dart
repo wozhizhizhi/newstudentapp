@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'pages/VolumePage.dart';
 import 'pages/ReadTimePage.dart';
+import 'package:studentapp/pages/ReadWeekDayStarPage.dart';
+import 'package:studentapp/pages/ReadFooterPage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -33,6 +35,8 @@ class _MyAppState extends State<MyApp> {
         "/readingvolumepage": (BuildContext context) => new ReadingVolumePage(),
         "/volumepage": (BuildContext context) => new VolumePage(),
         "/readtimepage": (BuildContext context) => new ReadTimePage(),
+        "/readweekdaystar": (BuildContext context) => new ReadWeekDayStarPage(),
+        "/readfooterpage": (BuildContext context) => new ReadFooterPage(),
       },
       home: new HomePage(),
     );

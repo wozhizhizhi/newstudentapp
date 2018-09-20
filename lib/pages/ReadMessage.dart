@@ -279,7 +279,7 @@ class _ReadMessageState extends State<ReadMessage> {
 
   /// 阅读足迹的item组件
   Widget _buildItemthree() {
-    return new Container(
+    return new InkWell(child: new Container(
       height: 67.0,
       color: Colors.white,
       child: new Row(
@@ -399,7 +399,9 @@ class _ReadMessageState extends State<ReadMessage> {
           ),
         ],
       ),
-    );
+    ),onTap: (){
+        Navigator.pushNamed(context, "/readfooterpage");
+    },);
   }
 
   /// 积分兑换的item组件
@@ -413,7 +415,7 @@ class _ReadMessageState extends State<ReadMessage> {
           new Container(
             margin: const EdgeInsets.only(left: 15.0),
             child: new Text(
-              "阅读足迹",
+              "积分兑换",
               style: TextStyle(color: StudentColors.s_484848, fontSize: 15.0),
             ),
           ),

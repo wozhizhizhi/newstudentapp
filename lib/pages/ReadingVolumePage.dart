@@ -24,7 +24,6 @@ class _ReadingVolumePageState extends State<ReadingVolumePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pageController = new PageController(initialPage: _index);
     if (widget.pageIndex == 0){
       _index = 0;
 
@@ -32,20 +31,23 @@ class _ReadingVolumePageState extends State<ReadingVolumePage> {
     else if (widget.pageIndex == 1){
       _index = 1;
     }
-
+    // 初始化当前的viewpage页面
+    _pageController = new PageController(initialPage: _index);
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new MyAppBar(
-        leading: new Container(
+        leading: new GestureDetector(child: new Container(
           padding: const EdgeInsets.all(10.0),
           child: new Image.asset(
             "images/btn_back_yellow.png",
             fit: BoxFit.scaleDown,
           ),
-        ),
+        ),onTap: (){
+          Navigator.pop(context);
+        },),
         actions: <Widget>[
           new Container(
             child: new Text(

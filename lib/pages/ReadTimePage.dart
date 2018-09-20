@@ -20,7 +20,7 @@ class _ReadTimePageState extends State<ReadTimePage> with AutomaticKeepAliveClie
           return _buildItemView(index);
 
         },
-        itemCount: 10*2+1,
+        itemCount: 10*2+1
       ),
     );
   }

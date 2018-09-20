@@ -1,55 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'package:http/http.dart'as http;
+import 'dart:isolate';
+import 'dart:convert';
+
 class UserPage extends StatefulWidget {
   @override
   _UserPageState createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
+  List widgets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  showLoadingDialog() {
+    if (widgets.length == 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  getBody() {
+    if (showLoadingDialog()) {
+      return getProgressDialog();
+    } else {
+      return getListView();
+    }
+  }
+
+  getProgressDialog() {
+    return new Center(child: new CircularProgressIndicator());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new CupertinoTabScaffold(
-      tabBar: new CupertinoTabBar(
-        items: <BottomNavigationBarItem> [
-          new BottomNavigationBarItem(icon: new Icon(Icons.map), title: new Text("left")),
-          new BottomNavigationBarItem(icon:  new Icon(Icons.cached), title: new Text("right")),
-        ],
-      ),
-      tabBuilder: (BuildContext context, int index) {
-        return new CupertinoTabView(
-          builder: (BuildContext context) {
-            return new CupertinoPageScaffold(
-              navigationBar: new CupertinoNavigationBar(
-                middle: new Text('Page 1 of tab $index'),
-              ),
-              child: new Center(
-                child: new CupertinoButton(
-                  child: const Text('Next page'),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      new CupertinoPageRoute<Null>(
-                        builder: (BuildContext context) {
-                          return new CupertinoPageScaffold(
-                            navigationBar: new CupertinoNavigationBar(
-                              middle: new Text('Page 2 of tab $index'),
-                            ),
-                            child: new Center(
-                              child: new CupertinoButton(
-                                child: const Text('Back'),
-                                onPressed: () { Navigator.of(context).pop(); },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Sample App"),
+        ),
+        body: getBody());
   }
+
+  ListView getListView() => new ListView.builder(
+      itemCount: widgets.length,
+      itemBuilder: (BuildContext context, int position) {
+        return getRow(position);
+      });
+
+  Widget getRow(int i) {
+    return new Padding(padding: new EdgeInsets.all(10.0), child: new Text("Row ${widgets[i]["title"]}"));
+  }
+
+  loadData() async {
+    ReceivePort receivePort = new ReceivePort();
+    await Isolate.spawn(dataLoader, receivePort.sendPort);
+
+    // The 'echo' isolate sends it's SendPort as the first message
+    SendPort sendPort = await receivePort.first;
+
+    List msg = await sendReceive(sendPort, "https://jsonplaceholder.typicode.com/posts");
+
+    setState(() {
+      widgets = msg;
+    });
+  }
+
+// the entry point for the isolate
+  static dataLoader(SendPort sendPort) async {
+    // Open the ReceivePort for incoming messages.
+    ReceivePort port = new ReceivePort();
+
+    // Notify any other isolates what port this isolate listens to.
+    sendPort.send(port.sendPort);
+
+    await for (var msg in port) {
+      String data = msg[0];
+      SendPort replyTo = msg[1];
+
+      String dataURL = data;
+      http.Response response = await http.get(dataURL);
+      // Lots of JSON to parse
+      replyTo.send(jsonDecode(response.body));
+    }
+  }
+
+  Future sendReceive(SendPort port, msg) {
+    ReceivePort response = new ReceivePort();
+    port.send([msg, response.sendPort]);
+    return response.first;
+  }
+
 }

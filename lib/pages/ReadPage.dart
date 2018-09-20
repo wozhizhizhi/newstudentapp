@@ -10,23 +10,26 @@ class ReadPage extends StatefulWidget {
   _ReadPageState createState() => new _ReadPageState();
 }
 
-class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
+class _ReadPageState extends State<ReadPage>
+    with AutomaticKeepAliveClientMixin {
   String url = "";
   final _chartSize = const Size(115.0, 115.0);
   final GlobalKey<AnimatedCircularChartState> _chartKey =
-  new GlobalKey<AnimatedCircularChartState>();
+      new GlobalKey<AnimatedCircularChartState>();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new SingleChildScrollView(
         child: new Column(
           children: <Widget>[
-            new Stack(children: <Widget>[
-              _buildTitle(),
+            new Stack(
+              children: <Widget>[
+                _buildTitle(),
 
-              /// 阅读量时长和天数控件
-              _buildLineWidget(),
-            ],),
+                /// 阅读量时长和天数控件
+                _buildLineWidget(),
+              ],
+            ),
 
             /// 下滑线
             new Padding(
@@ -77,7 +80,8 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
             ),
             fit: BoxFit.fill),
       ),
-      child: new Container(margin: const EdgeInsets.only(top: 25.0),
+      child: new Container(
+        margin: const EdgeInsets.only(top: 25.0),
         child: new Column(
           children: <Widget>[
             new GestureDetector(
@@ -273,7 +277,8 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
                   style: new TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ),
-              margin: const EdgeInsets.only(right: 100.0, left: 100.0,top: 19.0,bottom: 30.0),
+              margin: const EdgeInsets.only(
+                  right: 100.0, left: 100.0, top: 19.0, bottom: 30.0),
             ),
           ],
         ),
@@ -437,88 +442,88 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
 //            minWidth: viewportConstraints.maxWidth,
 //          ),
 //          child:
-        new IntrinsicWidth(
-          child: new Row(
-            children: <Widget>[
-              new Container(
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: StudentColors.s_f6f6f6,
-                  ),
-                  width: 39.0,
-                  height: 39.0,
-                  child: new Text("10"),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0)),
-              new Container(
-                child: new Image.asset(
-                  "images/homepage_icon_pass.png",
-                  width: 39.0,
-                  height: 39.0,
+          new IntrinsicWidth(
+        child: new Row(
+          children: <Widget>[
+            new Container(
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: StudentColors.s_f6f6f6,
                 ),
+                width: 39.0,
+                height: 39.0,
+                child: new Text("10"),
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+                margin: const EdgeInsets.only(top: 13.0)),
+            new Container(
+              child: new Image.asset(
+                "images/homepage_icon_pass.png",
+                width: 39.0,
+                height: 39.0,
               ),
-              new Container(
-                child: new Image.asset(
-                  "images/homepage_icon_pass.png",
-                  width: 39.0,
-                  height: 39.0,
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+            ),
+            new Container(
+              child: new Image.asset(
+                "images/homepage_icon_pass.png",
+                width: 39.0,
+                height: 39.0,
+              ),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+            ),
+            new Container(
+              child: new Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  new Image.asset(
+                    "images/homepage_icon_today.png",
+                    width: 39.0,
+                    height: 39.0,
+                  ),
+                  new Text(
+                    "四",
+                    style: new TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 13.0, left: 9.0),
+            ),
+            new Container(
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: StudentColors.s_f6f6f6,
                 ),
+                width: 39.0,
+                height: 39.0,
+                child: new Text("五"),
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
-              ),
-              new Container(
-                child: new Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    new Image.asset(
-                      "images/homepage_icon_today.png",
-                      width: 39.0,
-                      height: 39.0,
-                    ),
-                    new Text(
-                      "四",
-                      style: new TextStyle(color: Colors.white),
-                    )
-                  ],
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
+            new Container(
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: StudentColors.s_f6f6f6,
                 ),
+                width: 39.0,
+                height: 39.0,
+                child: new Text("六"),
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(top: 13.0, left: 9.0),
-              ),
-              new Container(
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: StudentColors.s_f6f6f6,
-                  ),
-                  width: 39.0,
-                  height: 39.0,
-                  child: new Text("五"),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
-              new Container(
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: StudentColors.s_f6f6f6,
-                  ),
-                  width: 39.0,
-                  height: 39.0,
-                  child: new Text("六"),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left:9.0)),
-              new Container(
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: StudentColors.s_f6f6f6,
-                  ),
-                  width: 39.0,
-                  height: 39.0,
-                  child: new Text("日"),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
-            ],
-          ),
-        );
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
+            new Container(
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: StudentColors.s_f6f6f6,
+                ),
+                width: 39.0,
+                height: 39.0,
+                child: new Text("日"),
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 13.0, left: 9.0)),
+          ],
+        ),
+      );
     },
   );
 
@@ -534,7 +539,7 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
             child: new Text(
               "班级阅读墙",
               style:
-              new TextStyle(color: StudentColors.s_666666, fontSize: 14.0),
+                  new TextStyle(color: StudentColors.s_666666, fontSize: 14.0),
             ),
             padding: const EdgeInsets.only(top: 14.0, left: 15.0),
           ),
@@ -542,125 +547,149 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                new InkWell(child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Text(
-                          "阅读量",
-                          style: new TextStyle(
-                              fontSize: 12.0, color: StudentColors.s_484848),
-                        ),
-                        new Padding(
-                          child: Image.asset(
-                            "images/homepage_btn_arrow_ese.png",
-                            width: 7.0,
-                            height: 12.0,
-                          ),
-                          padding: const EdgeInsets.only(left: 2.5),
-                        ),
-                      ],
-                    ),
-                    new RichText(
-                      text: new TextSpan(children: <TextSpan>[
-                        new TextSpan(
-                            text: "10",
+                new InkWell(
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Text(
+                            "阅读量",
                             style: new TextStyle(
-                                fontSize: 18.0, color: StudentColors.s_484848)),
-                        new TextSpan(
-                            text: "名",
-                            style: new TextStyle(
-                                fontSize: 14.0, color: StudentColors.s_484848)),
-                      ]),
-                    )
-                  ],
-                ),onTap: (){
-                  Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new ReadingVolumePage(pageIndex: 0,)));
-                },),
-                new Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Text(
-                          "阅读时长",
-                          style: new TextStyle(
-                              fontSize: 12.0, color: StudentColors.s_484848),
-                        ),
-                        new Padding(
-                          child: Image.asset(
-                            "images/homepage_btn_arrow_ese.png",
-                            width: 7.0,
-                            height: 12.0,
+                                fontSize: 12.0, color: StudentColors.s_484848),
                           ),
-                          padding: const EdgeInsets.only(left: 2.5),
-                        ),
-                      ],
-                    ),
-                    new RichText(
-                      text: new TextSpan(
-                          style: new TextStyle(
-                            textBaseline: TextBaseline.alphabetic,
+                          new Padding(
+                            child: Image.asset(
+                              "images/homepage_btn_arrow_ese.png",
+                              width: 7.0,
+                              height: 12.0,
+                            ),
+                            padding: const EdgeInsets.only(left: 2.5),
                           ),
-                          children: <TextSpan>[
-                            new TextSpan(
-                                text: "16",
-                                style: new TextStyle(
-                                    fontSize: 18.0,
-                                    color: StudentColors.s_484848)),
-                            new TextSpan(
-                                text: "名",
-                                style: new TextStyle(
-                                    fontSize: 14.0,
-                                    color: StudentColors.s_484848)),
-                          ]),
-                    )
-                  ],
+                        ],
+                      ),
+                      new RichText(
+                        text: new TextSpan(children: <TextSpan>[
+                          new TextSpan(
+                              text: "10",
+                              style: new TextStyle(
+                                  fontSize: 18.0,
+                                  color: StudentColors.s_484848)),
+                          new TextSpan(
+                              text: "名",
+                              style: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: StudentColors.s_484848)),
+                        ]),
+                      )
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                new ReadingVolumePage(
+                                  pageIndex: 0,
+                                )));
+                  },
                 ),
-                new Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Text(
-                          "班级阅读墙",
-                          style: new TextStyle(
-                              fontSize: 12.0, color: StudentColors.s_484848),
-                        ),
-                        new Padding(
-                          child: Image.asset(
-                            "images/homepage_btn_arrow_ese.png",
-                            width: 7.0,
-                            height: 12.0,
+                new InkWell(
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Text(
+                            "阅读时长",
+                            style: new TextStyle(
+                                fontSize: 12.0, color: StudentColors.s_484848),
                           ),
-                          padding: const EdgeInsets.only(left: 2.5),
-                        ),
-                      ],
-                    ),
-                    new RichText(
-                      text: new TextSpan(
-                          style: new TextStyle(
-                            textBaseline: TextBaseline.alphabetic,
+                          new Padding(
+                            child: Image.asset(
+                              "images/homepage_btn_arrow_ese.png",
+                              width: 7.0,
+                              height: 12.0,
+                            ),
+                            padding: const EdgeInsets.only(left: 2.5),
                           ),
-                          children: <TextSpan>[
-                            new TextSpan(
-                                text: "10",
-                                style: new TextStyle(
-                                    fontSize: 18.0,
-                                    color: StudentColors.s_484848)),
-                            new TextSpan(
-                                text: "名",
-                                style: new TextStyle(
-                                    fontSize: 14.0,
-                                    color: StudentColors.s_484848)),
-                          ]),
-                    )
-                  ],
-                )
+                        ],
+                      ),
+                      new RichText(
+                        text: new TextSpan(
+                            style: new TextStyle(
+                              textBaseline: TextBaseline.alphabetic,
+                            ),
+                            children: <TextSpan>[
+                              new TextSpan(
+                                  text: "16",
+                                  style: new TextStyle(
+                                      fontSize: 18.0,
+                                      color: StudentColors.s_484848)),
+                              new TextSpan(
+                                  text: "名",
+                                  style: new TextStyle(
+                                      fontSize: 14.0,
+                                      color: StudentColors.s_484848)),
+                            ]),
+                      )
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return new ReadingVolumePage(
+                        pageIndex: 1,
+                      );
+                    }));
+                  },
+                ),
+                new InkWell(
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Text(
+                            "班级阅读墙",
+                            style: new TextStyle(
+                                fontSize: 12.0, color: StudentColors.s_484848),
+                          ),
+                          new Padding(
+                            child: Image.asset(
+                              "images/homepage_btn_arrow_ese.png",
+                              width: 7.0,
+                              height: 12.0,
+                            ),
+                            padding: const EdgeInsets.only(left: 2.5),
+                          ),
+                        ],
+                      ),
+                      new RichText(
+                        text: new TextSpan(
+                            style: new TextStyle(
+                              textBaseline: TextBaseline.alphabetic,
+                            ),
+                            children: <TextSpan>[
+                              new TextSpan(
+                                  text: "10",
+                                  style: new TextStyle(
+                                      fontSize: 18.0,
+                                      color: StudentColors.s_484848)),
+                              new TextSpan(
+                                  text: "名",
+                                  style: new TextStyle(
+                                      fontSize: 14.0,
+                                      color: StudentColors.s_484848)),
+                            ]),
+                      )
+                    ],
+                  ),
+                  onTap: () => Navigator.pushNamed(context, "/readweekdaystar"),
+                ),
               ],
             ),
             padding: const EdgeInsets.only(top: 15.0),
@@ -687,7 +716,7 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
               height: 16.0,
             ),
             padding:
-            const EdgeInsets.only(right: 15.0, top: 15.0, bottom: 15.0),
+                const EdgeInsets.only(right: 15.0, top: 15.0, bottom: 15.0),
           ),
         ],
       ),
@@ -723,19 +752,19 @@ class _ReadPageState extends State<ReadPage> with AutomaticKeepAliveClientMixin{
 
         new Card(
             child: new Image.asset(
-              "images/homepage_banner_ad1.png",
-              fit: BoxFit.fill,
-            )),
+          "images/homepage_banner_ad1.png",
+          fit: BoxFit.fill,
+        )),
         new Card(
             child: new Image.asset(
-              "images/homepage_banner_ad2.png",
-              fit: BoxFit.fill,
-            )),
+          "images/homepage_banner_ad2.png",
+          fit: BoxFit.fill,
+        )),
         new Card(
             child: new Image.asset(
-              "images/homepage_banner_ad3.png",
-              fit: BoxFit.fill,
-            )),
+          "images/homepage_banner_ad3.png",
+          fit: BoxFit.fill,
+        )),
       ],
       log: false,
       indicatorMargin: 4.0,
