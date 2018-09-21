@@ -35,14 +35,23 @@ class _TaskItemPageState extends State<TaskItemPage>
     return new DefaultTabController(
       length: tabs.length,
       child: new Scaffold(
-        appBar: new AppBar(
-          title: new TabBar(
-            tabs: tabs,
-          ),
-        ),
-        body: new TabBarView(physics: NeverScrollableScrollPhysics(),
+        appBar: new PreferredSize(
+            child: new AppBar(
+              elevation: 0.0,
+              title: new Container(
+                child: new TabBar(
+                  tabs: tabs,
+                 unselectedLabelColor: StudentColors.s_9a9a9a,
+                labelColor: StudentColors.s_22b2e1,
+                indicatorColor: Colors.transparent,
+                ),
+              ),
+            ),
+            preferredSize: Size.fromHeight(49.0)),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: tabs.map((Tab tab) {
-            return  new ListView.builder(
+            return new ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return new ListTile(
                   title: new Text(tab.text),

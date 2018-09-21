@@ -15,7 +15,7 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
   double opacityLevel = 0.0;
   double sysStatsHeight = 0.0;
   ScrollController _scrollController;
-  Color bgColor= Colors.transparent;
+  Color bgColor = Colors.transparent;
   Color titleColor = Colors.white;
   String _backurl = "images/task_btn_return.png";
 
@@ -27,19 +27,19 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
       ..addListener(() {
         if (_scrollController.position.pixels == 0.0) {
           bgColor = Colors.transparent;
-          titleColor =  Colors.white;
+          titleColor = Colors.white;
           setState(() {
             _backurl = "images/task_btn_return.png";
           });
         } else if (_scrollController.position.pixels <= 48.0) {
           bgColor = Colors.white54;
-          titleColor =  StudentColors.s_484848;
+          titleColor = StudentColors.s_484848;
           setState(() {
             _backurl = "images/task_btn_return.png";
           });
         } else {
           bgColor = Colors.white;
-          titleColor =  StudentColors.s_484848;
+          titleColor = StudentColors.s_484848;
           setState(() {
             _backurl = "images/btn_back_yellow.png";
           });
@@ -62,7 +62,7 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
       body: new Stack(
         children: <Widget>[
           new ListView.builder(
-            padding: const EdgeInsets.only(top: 0.0),
+            padding: const EdgeInsets.only(top: 0.0, bottom: 100.0),
             itemBuilder: (context, index) {
               if (index == 0) {
                 return _buildHead();
@@ -73,6 +73,11 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
             controller: _scrollController,
           ),
           _buildTitle(),
+          // 最底部的控件
+          new Align(
+            child: _buildBottomWidget(),
+            alignment: Alignment.bottomCenter,
+          ),
         ],
       ),
     );
@@ -85,16 +90,19 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          new InkWell(child: new Container(
-            margin: const EdgeInsets.only(left: 12.0, right: 12.0, top: 24.0),
-            child: new Image.asset(
-              _backurl,
-              width: 27.0,
-              height: 27.0,
-            ),),
-          onTap: (){
-            Navigator.pop(context);
-          },),
+          new InkWell(
+            child: new Container(
+              margin: const EdgeInsets.only(left: 12.0, right: 12.0, top: 24.0),
+              child: new Image.asset(
+                _backurl,
+                width: 27.0,
+                height: 27.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
           new Container(
             margin: const EdgeInsets.only(top: 24.0),
             child: new Text(
@@ -231,7 +239,7 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
             ),
           ),
           new Container(
-            color: Colors.white,
+            color: StudentColors.s_f6f6f6,
             alignment: Alignment.centerLeft,
             child: new Text(
               "书虫榜",
@@ -262,7 +270,7 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
     final pos = index ~/ 2;
     return new Container(
       height: 60.0,
-      color: Colors.white,
+      color: StudentColors.s_f6f6f6,
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -377,6 +385,139 @@ class _ReadWeekDayStarPageState extends State<ReadWeekDayStarPage> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  /// 底部控件
+  Widget _buildBottomWidget() {
+    return new Container(
+      color: Colors.white,
+      height: 100.0,
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          new Row(
+            children: <Widget>[
+              new Container(
+                child: new Text(
+                  "10",
+                  style:
+                      TextStyle(fontSize: 14.0, color: StudentColors.s_666666),
+                ),
+                margin: const EdgeInsets.only(left: 15.0),
+              ),
+              new Container(
+                child: new CircleAvatar(
+                  backgroundImage: AssetImage("images/defaul_head_parent.png"),
+                ),
+                width: 50.0,
+                height: 50.0,
+                margin: const EdgeInsets.only(left: 9.0),
+              ),
+              new Container(
+                margin: const EdgeInsets.only(left: 13.0),
+                child: new Column(
+                  children: <Widget>[
+                    new Container(
+                      child: new Text(
+                        "陈明明",
+                        style: TextStyle(
+                            fontSize: 18.0, color: StudentColors.s_666666),
+                      ),
+                      margin: const EdgeInsets.only(top: 20.0),
+                    ),
+                    new Container(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Image.asset(
+                            "images/wall_icon_counts_word.png",
+                            width: 10.0,
+                            height: 10.0,
+                          ),
+                          new Container(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: new Text(
+                              "7千字",
+                              style: TextStyle(
+                                  color: StudentColors.s_999999,
+                                  fontSize: 11.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Container(
+                      padding: const EdgeInsets.only(top: 2.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Image.asset(
+                            "images/wall_icon_time.png",
+                            width: 10.0,
+                            height: 10.0,
+                          ),
+                          new Container(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: new Text(
+                              "2小时",
+                              style: TextStyle(
+                                  color: StudentColors.s_999999,
+                                  fontSize: 11.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+              ),
+            ],
+          ),
+          new Container(
+            margin: const EdgeInsets.only(right: 12.0),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text(
+                  "坚持阅读",
+                  style:
+                      TextStyle(color: StudentColors.s_666666, fontSize: 11.0),
+                ),
+                new Text.rich(
+                  new TextSpan(
+                    children: [
+                      new TextSpan(
+                        text: "2",
+                        style: TextStyle(
+                            color: StudentColors.s_666666, fontSize: 18.0),
+                      ),
+                      new TextSpan(
+                          text: "天",
+                          style: TextStyle(
+                              color: StudentColors.s_666666, fontSize: 12.0))
+                    ],
+                  ),
+                ),
+                new Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 5.0),
+                  height: 24.0,
+                  width: 69.0,
+                  child: new Text(
+                    "个人报告",
+                    style: TextStyle(fontSize: 12.0, color: Colors.white),
+                  ),
+                  decoration: new BoxDecoration(
+                    borderRadius: new BorderRadius.circular(5.0),
+                    color: StudentColors.s_22b2e1,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
