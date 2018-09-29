@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'dart:isolate';
 import 'dart:convert';
 
@@ -55,7 +55,9 @@ class _UserPageState extends State<UserPage> {
       });
 
   Widget getRow(int i) {
-    return new Padding(padding: new EdgeInsets.all(10.0), child: new Text("Row ${widgets[i]["title"]}"));
+    return new Padding(
+        padding: new EdgeInsets.all(10.0),
+        child: new Text("Row ${widgets[i]["title"]}"));
   }
 
   loadData() async {
@@ -65,7 +67,8 @@ class _UserPageState extends State<UserPage> {
     // The 'echo' isolate sends it's SendPort as the first message
     SendPort sendPort = await receivePort.first;
 
-    List msg = await sendReceive(sendPort, "https://jsonplaceholder.typicode.com/posts");
+    List msg = await sendReceive(
+        sendPort, "https://jsonplaceholder.typicode.com/posts");
 
     setState(() {
       widgets = msg;
@@ -96,5 +99,4 @@ class _UserPageState extends State<UserPage> {
     port.send([msg, response.sendPort]);
     return response.first;
   }
-
 }

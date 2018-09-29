@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:studentapp/colors/StudentColors.dart';
+import 'package:studentapp/pages/MedalWallPage.dart';
 
 class ReadMessage extends StatefulWidget {
   @override
@@ -231,7 +232,7 @@ class _ReadMessageState extends State<ReadMessage> {
 
   /// 勋章墙item组件
   Widget _buildItemtwo() {
-    return new Container(
+    return new InkWell(child: new Container(
       height: 67.0,
       color: Colors.white,
       child: new Row(
@@ -274,7 +275,11 @@ class _ReadMessageState extends State<ReadMessage> {
           ),
         ],
       ),
-    );
+    ),onTap: (){
+        Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+          return new MedalWallPage();
+        }));
+    },);
   }
 
   /// 阅读足迹的item组件

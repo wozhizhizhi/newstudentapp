@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:banner_view/banner_view.dart';
 import 'package:studentapp/colors/StudentColors.dart';
 import 'package:studentapp/pages/TaskItemPage.dart';
+import 'package:studentapp/util/ScreenUtil.dart';
+import 'dart:async';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -14,6 +16,8 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
   TabController _tabController;
   PageController _pageController;
   int _curIndex = 0;
+  double itemWith = 0.0;
+  double itemHeight = 0.0;
 
   @override
   void initState() {
@@ -31,6 +35,14 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  double getPhoneWith() {
+    double itemWith = ScreenUtil.getScreenWidth(context);
+    setState(() {
+      itemWith = itemWith;
+    });
+    return itemWith;
+  }
+
   /// PageView中onPageChanged代表页面改变的时候
   pageChanged(int index) {
     _curIndex = index;
@@ -39,6 +51,8 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    itemWith = getPhoneWith();
+    itemHeight = 65.0;
     return new Scaffold(
       body: new NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -51,11 +65,16 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
                     fontSize: 18.0, color: StudentColors.s_484848),
               ),
               centerTitle: true,
-              expandedHeight: 230.0,
+              expandedHeight: 295.0,
               backgroundColor: Colors.white,
               flexibleSpace: new FlexibleSpaceBar(
                 background: new Container(
-                  child: _banner(),
+                  child: new Column(
+                    children: <Widget>[
+                      _banner(),
+                      _readActivity(),
+                    ],
+                  ),
                   padding: const EdgeInsets.only(top: 75.0),
                 ),
               ),
@@ -97,15 +116,23 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
   }
 
   Widget _buildItemBarView() {
-    return new ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return new ListTile(subtitle: new Text("我的"),
-          leading: new Icon(Icons.title),
-          title: new Text("今天天气很好"),
-        );
-      },
-      itemCount: 10,
-    );
+    return LayoutBuilder(builder:
+        (BuildContext context, BoxConstraints viewportConstraints) {
+      return new ConstrainedBox(
+        constraints:
+        new BoxConstraints(maxHeight: viewportConstraints.maxHeight),
+        child: new ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return new ListTile(
+              subtitle: new Text("我的"),
+              leading: new Icon(Icons.title),
+              title: new Text("今天天气很好"),
+            );
+          },
+          itemCount: 10,
+        ),
+      );
+    });
   }
 
   Widget _buildTabview() {
@@ -152,26 +179,83 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
             ),
           ),
           new Expanded(
-            child: new Container(child: new PageView.builder(
-              // 禁止滑动
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                _buildItemBarView();
-              },
-              onPageChanged: pageChanged,
-              controller: _pageController,
-              itemCount: _buttonTabs.length,
-            ),),
+            child: new Container(
+              child: new PageView.builder(
+                // 禁止滑动
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  _buildItemBarView();
+                },
+                onPageChanged: pageChanged,
+                controller: _pageController,
+                itemCount: _buttonTabs.length,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
+  /** 广告下面的阅读活动组件 */
+  Widget _readActivity() {
+    return new Expanded(
+        child: new Container(
+      color: StudentColors.s_ffffff,
+      height: 128.0,
+//        decoration: new ShapeDecoration(
+//            shape: new RoundedRectangleBorder(
+//                borderRadius: new BorderRadius.circular(15.0))),
+      child: new Column(
+        children: <Widget>[
+          new Container(
+            margin: const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  "阅读活动",
+                  style:
+                      TextStyle(color: StudentColors.s_484848, fontSize: 14.0),
+                ),
+                new Image.asset(
+                  "images/homepage_btn_arrow_ese.png",
+                  width: 12.0,
+                  height: 12.0,
+                )
+              ],
+            ),
+          ),
+          new Container(margin: const EdgeInsets.only(left: 15.0,top: 15.0),child: LayoutBuilder(builder:
+              (BuildContext context, BoxConstraints viewportConstraints) {
+            return new ConstrainedBox(
+              constraints:
+                  new BoxConstraints(minWidth: viewportConstraints.maxWidth,maxHeight: 65.0),
+              child: new ListView.builder(
+                itemBuilder: (context, index) {
+                  return new Card(
+                    child:  new Image.asset(
+                      "images/task_banner_ad1.png",
+                      width: 120.0,
+                      height: 65.0,
+                      fit: BoxFit.fill,
+                    ),
+                  );
+                },
+                itemCount: 6,
+                scrollDirection: Axis.horizontal,
+              ),
+            );
+          }),),
+        ],
+      ),
+    ));
+  }
+
   /** 广告组件 */
   Widget _banner() {
     return new Container(
-      height: 156.0,
+      height: 120.0,
 //        decoration: new ShapeDecoration(
 //            shape: new RoundedRectangleBorder(
 //                borderRadius: new BorderRadius.circular(15.0))),

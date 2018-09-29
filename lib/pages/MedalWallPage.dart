@@ -10,12 +10,20 @@ class _MedalWallPageState extends State<MedalWallPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Container(
-        child: new Container(
-          child: new Image.asset("images/task_btn_return.png"),
-        ),
         decoration: new BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/medalswall_img_bg.png"))),
+          image: DecorationImage(
+              image: AssetImage("images/medalswall_img_bg.png"),
+              fit: BoxFit.fill),
+        ),
+        child: new ListView(
+          children: <Widget>[
+            new Container(
+              child: new Image.asset("images/task_btn_return.png"),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(top: 15.0, left: 15.0),
+            ),
+          ],
+        ),
       ),
     );
   }

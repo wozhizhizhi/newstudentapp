@@ -15,4 +15,5 @@ class StudentColors{
   static const Color s_e5e5e5 = const Color(0xffe5e5e5);
   static const Color s_fce705 = const Color(0xfffce705);
   static const Color s_22b2e1 = const Color(0xff22b2e1);
+  static const Color s_ffffff = const Color(0xffffffff);
 }

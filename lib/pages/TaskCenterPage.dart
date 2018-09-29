@@ -38,6 +38,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     super.initState();
     _pageController = new PageController(initialPage: _curIndex);
     _scrollController = new ScrollController();
+//    SystemChrome.setEnabledSystemUIOverlays([]);
 //    appUIStyle();
   }
 
