@@ -11,6 +11,11 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   banner_view: ^1.1.2
   json_annotation: ^1.0.0
+  dio: ^1.0.6
+  shared_preferences: ^0.4.3
+  fluttertoast: ^2.0.9
+  flutter_plugin:
+        path: ../flutter_plugin #获取设备信息插件
 
 dev_dependencies:
   build_runner: ^0.10.0
@@ -30,6 +35,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+  # assets begin
+  # images/*
+  # assets end
+    - images/
     - images/launcher.jpg
     - images/bar_icon_reading_circle.png
     - images/bar_icon_reading_circle2.png
@@ -56,7 +65,7 @@ flutter:
     - images/task_banner_ad3.png
     - images/footprints_img_top.png
     - images/btn_back_yellow.png
-    - images/reading information_img_bg.png
+    - images/reading_information_img_bg.png
     - images/task_bg.png
     - images/task_btn_return.png
     - images/task_icon_reading.png
@@ -90,6 +99,9 @@ flutter:
     - images/icon_back_white.png
     - images/wall_icon_time.png
     - images/readfooter1.png
+    - images/login_img_bg.png
+    - images/img_login_pwd.png
+    - images/img_login_user.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

@@ -10,6 +10,7 @@ import 'pages/VolumePage.dart';
 import 'pages/ReadTimePage.dart';
 import 'package:studentapp/pages/ReadWeekDayStarPage.dart';
 import 'package:studentapp/pages/ReadFooterPage.dart';
+import 'pages/LoginPage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -37,8 +38,9 @@ class _MyAppState extends State<MyApp> {
         "/readtimepage": (BuildContext context) => new ReadTimePage(),
         "/readweekdaystar": (BuildContext context) => new ReadWeekDayStarPage(),
         "/readfooterpage": (BuildContext context) => new ReadFooterPage(),
+        "/loginpage": (BuildContext context) => new LoginPage(),
       },
-      home: new HomePage(),
+      home: new LoginPage(),
     );
   }
 }

@@ -75,7 +75,7 @@ class _ReadMessageState extends State<ReadMessage> {
       width: 400.0,
       decoration: new BoxDecoration(
           image: new DecorationImage(
-              image: new AssetImage("images/reading information_img_bg.png"),
+              image: new AssetImage("images/reading_information_img_bg.png"),
               fit: BoxFit.fill)),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
