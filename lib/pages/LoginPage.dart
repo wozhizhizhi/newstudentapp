@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/colors/StudentColors.dart';
+import 'package:studentapp/dao/UserDao.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -24,6 +25,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  // 登录请求接口
+  Future<Null> _getLoginData(String account, String realPassword) async {
+    await UserDao.getLogin(account, realPassword);
+  }
+
 
   Widget buildLogin() {
     return new Column(
@@ -135,7 +141,12 @@ class _LoginPageState extends State<LoginPage> {
                         "") {
                   String account = _usetNameEditingController.value.text;
                   String passWord = _passWordEditingController.value.text;
-//                  _getLoginData(account, passWord);
+                  _getLoginData(account, passWord);
+                
+//                  ()async{
+//                    await UserDao.getLogin(account, passWord);
+//                  };
+
                 } else {
                   // 这样写有问题！可以在最外层new Builder
 //                    Scaffold.of(context).showSnackBar(

@@ -12,6 +12,7 @@ dependencies:
   banner_view: ^1.1.2
   json_annotation: ^1.0.0
   dio: ^1.0.6
+  connectivity: ^0.3.2
   shared_preferences: ^0.4.3
   fluttertoast: ^2.0.9
   flutter_plugin:
