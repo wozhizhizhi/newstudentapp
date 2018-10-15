@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_plugin/flutter_plugin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:connectivity/connectivity.dart';
@@ -9,7 +8,8 @@ import 'package:studentapp/net/ResultData.dart';
 import 'dart:collection';
 import 'package:studentapp/util/LocalSharePreferences.dart';
 import 'package:studentapp/net/Config.dart';
-import 'dart:convert';
+import 'dart:io';
+import 'package:studentapp/net/Address.dart';
 
 class Api {
   static const CONTENT_TYPE_JSON = "application/json";
@@ -77,12 +77,12 @@ class Api {
     systemMark = await FlutterPlugin.getsystemMark;
 
     Map comParams = {
-    "token": null,
-    "time": new DateTime.now().millisecondsSinceEpoch,
-    "uniqueId":  uuid,
+    "token":null,
+    "time":new DateTime.now().millisecondsSinceEpoch,
+    "uniqueId":uuid,
     "phoneMark":phoneMark,
-    "systemMark": systemMark,
-    "platForm": defaultTargetPlatform == TargetPlatform.android ? 1 : 2,
+    "systemMark":systemMark,
+    "platForm":defaultTargetPlatform == TargetPlatform.android ? 1 : 2,
     "version":version,
   };
     /// 没有网络
@@ -119,12 +119,16 @@ class Api {
 
     if (optins != null) {
       optins.headers = headers;
+      optins.baseUrl = Address.BASE_URL;
       optins.connectTimeout = 15000;
+      optins.contentType =  ContentType.parse("application/x-www-form-urlencoded");
 
     } else{
       optins = new Options(method: "get");
       optins.headers = headers;
+      optins.baseUrl = Address.BASE_URL;
       optins.connectTimeout = 15000;
+      optins.contentType =  ContentType.parse("application/x-www-form-urlencoded");
     }
 
     Dio dio = new Dio();
@@ -166,23 +170,33 @@ class Api {
     }
 
     try {
-      if (optins.contentType != null) {
-        return new ResultData(response.data, true, Code.SUCCESS);
-      } else {
+//      if (optins.contentType != null) {
+//        return new ResultData(response.data, true, Code.SUCCESS);
+//      } else {
+//        var
+// = response.data;
+//        if (response.statusCode == 201 && responseJson["token"] != null) {
+//          comParams["token"] = responseJson["token"];
+//          await LocalSharePreferences.saveString(Config.TOKEN_KEY, comParams["token"]);
+//        }
+//      }
+//      if (response.statusCode == 200 || response.statusCode == 201) {
+//        return new ResultData(response.data, true, Code.SUCCESS, header: response.headers);
+//      }
         var responseJson = response.data;
-        if (response.statusCode == 201 && responseJson["token"] != null) {
+        if (response.statusCode == 200 && responseJson["token"] != null){
           comParams["token"] = responseJson["token"];
           await LocalSharePreferences.saveString(Config.TOKEN_KEY, comParams["token"]);
         }
-      }
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return new ResultData(response.data, true, Code.SUCCESS, header: response.headers);
-      }
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          return new ResultData(response.data, true, Code.SUCCESS, header: response.headers);
+        }
     } catch (e) {
       print(e.toString() + url);
       return new ResultData(response.data, false, response.statusCode, header: response.headers);
     }
-    return new ResultData(Code.errorHandleFunction(response.statusCode, "", noTip), false, response.statusCode);
+//    return new ResultData(Code.errorHandleFunction(response.statusCode, "", noTip), false, response.statusCode);
   }
 
 //  ///清除授权

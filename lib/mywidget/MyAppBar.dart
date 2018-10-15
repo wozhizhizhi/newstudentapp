@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget{
   final Widget leading;
   final Widget title;
   final List<Widget> actions;

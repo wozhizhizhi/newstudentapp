@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/colors/StudentColors.dart';
 import 'package:studentapp/dao/UserDao.dart';
+import 'package:studentapp/util/LocalSharePreferences.dart';
+import 'package:studentapp/net/Config.dart';
+import 'package:studentapp/pages/HomePage.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +16,24 @@ class _LoginPageState extends State<LoginPage> {
       new TextEditingController();
   TextEditingController _passWordEditingController =
       new TextEditingController();
+  String name , pw;
+
+  void textIs() async{
+    String name = await LocalSharePreferences.get(Config.USER_NAME_KEY);
+    String password = await LocalSharePreferences.get(Config.PW_KEY);
+    setState(() {
+      name = name;
+      pw = password;
+    });
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    textIs();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +48,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
   // 登录请求接口
-  Future<Null> _getLoginData(String account, String realPassword) async {
-    await UserDao.getLogin(account, realPassword);
+  void _getLoginData(String account, String realPassword) async {
+   var resultData = await UserDao.getLogin(account, realPassword);
+    if (resultData.data["token"] != null && resultData.data["token"] != ""){
+//      Navigator.of(context).pop(true);
+//      Navigator.popAndPushNamed(context, "/homepage");
+         Navigator.pushReplacement(
+             context, MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+    }
   }
-
-
   Widget buildLogin() {
     return new Column(
       children: <Widget>[
@@ -142,18 +168,17 @@ class _LoginPageState extends State<LoginPage> {
                   String account = _usetNameEditingController.value.text;
                   String passWord = _passWordEditingController.value.text;
                   _getLoginData(account, passWord);
-                
-//                  ()async{
-//                    await UserDao.getLogin(account, passWord);
-//                  };
+//                  var resultData = UserDao.getLogin(account, passWord);
+
+
 
                 } else {
                   // 这样写有问题！可以在最外层new Builder
-//                    Scaffold.of(context).showSnackBar(
-//                          new SnackBar(
-//                            content: new Text("请先输入账号或者密码"),
-//                          ),
-//                        );
+                    Scaffold.of(context).showSnackBar(
+                          new SnackBar(
+                            content: new Text("请先输入账号或者密码"),
+                          ),
+                        );
                 }
               },
               child: new Text(
@@ -199,4 +224,5 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
 }

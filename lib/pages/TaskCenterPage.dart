@@ -100,6 +100,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
             child: new Text(
               "任务中心",
               style: new TextStyle(fontSize: 18.0, color: Colors.white),
+
             ),
           )
         ],

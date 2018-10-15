@@ -5,6 +5,7 @@ import 'package:studentapp/pages/ReadCirclePage.dart';
 import 'package:studentapp/pages/TaskPage.dart';
 import 'package:studentapp/pages/UserPage.dart';
 import 'package:studentapp/pages/ReadPage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   var tabImages;
   var _body;
   int _curIndex = 0;
+  int _lastClickTime = 0;
 
   /// 文字的选中效果
   final TextStyle textSelected =
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
     _initImage();
     _initPage();
 
-    return new Scaffold(
+    return WillPopScope(child: new Scaffold(
       body: _body,
       bottomNavigationBar: new CupertinoTabBar(items: <BottomNavigationBarItem>[
         new BottomNavigationBarItem(
@@ -115,6 +117,17 @@ class _HomePageState extends State<HomePage> {
           _curIndex = index;
         });
       },),
-    );
+    ),onWillPop: _doExitApp,);
+  }
+
+  Future<bool> _doExitApp(){
+    int nowTime = new DateTime.now().millisecondsSinceEpoch;
+    if (_lastClickTime != 0 && nowTime - _lastClickTime < 1500){
+      return Future.value(true);
+    }else{
+      Fluttertoast.showToast(msg: "再按一次退出应用",gravity: ToastGravity.CENTER);
+      _lastClickTime = new DateTime.now().millisecondsSinceEpoch;
+      return Future.value(false);
+    }
   }
 }
