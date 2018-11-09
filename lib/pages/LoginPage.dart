@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         keyboardType: TextInputType.phone,
                         controller: _usetNameEditingController,
                         decoration: new InputDecoration.collapsed(
-                          hintText: "请输入手机号码",
+                          hintText: "请输入手机号",
                           hintStyle: new TextStyle(fontSize: 15.0),
                         ),
                       ),
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-          // 装饰设置外围的圆角,里面为白色
+          // 装饰设置外围的圆�?,里面为白�?
           decoration: new BoxDecoration(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(8.0),
@@ -173,10 +173,10 @@ class _LoginPageState extends State<LoginPage> {
 
 
                 } else {
-                  // 这样写有问题！可以在最外层new Builder
+                  // 这样写有�?题！�?以在最外层new Builder
                     Scaffold.of(context).showSnackBar(
                           new SnackBar(
-                            content: new Text("请先输入账号或者密码"),
+                            content: new Text("请先输入账号或者密码?"),
                           ),
                         );
                 }
@@ -201,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
           child: new OutlineButton(
             onPressed: null,
             child: new Text(
-              "微信登录",
+              "登录",
               style: new TextStyle(color: StudentColors.s_22b2e1, fontSize: 14.0),
             ),
             shape: new StadiumBorder(),

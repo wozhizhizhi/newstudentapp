@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 /**
- * 任务中心
+ * 浠诲姟涓�蹇�
  */
 class TaskCenterPage extends StatefulWidget {
   @override
@@ -16,9 +16,9 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
   PageController _pageController;
   ScrollController _scrollController;
   int _curIndex = 0;
-  List<String> titles = ["日常任务", "特殊任务"];
+  List<String> titles = ["鏃ュ父浠诲姟", "鐗规畩浠诲姟"];
 
-  // 对于真机设置状态栏透明
+  // 瀵逛簬鐪熸満璁剧疆鐘舵€佹爮閫忔槑
 //  static SystemUiOverlayStyle uiStyle = const SystemUiOverlayStyle(
 //    systemNavigationBarColor: const Color(0x00000000),
 //    systemNavigationBarDividerColor: null,
@@ -61,13 +61,13 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     );
   }
 
-  /// 调用插件的删除
+  /// 璋冪敤鎻掍欢鐨勫垹闄�
 //  Future<void> close() async {
 //    // Platform messages may fail, so we use a try/catch PlatformException.
 //    try {
 //      await FlutterCloseactivityPlugin.activityClose;
 //    } on PlatformException {
-//      print("调用失败");
+//      print("璋冪敤澶辫触");
 //    }
 //
 //    // If the widget was removed from the tree while the asynchronous platform
@@ -76,7 +76,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
 //    if (!mounted) return;
 //  }
 
-  /// 标题
+  /// 鏍囬��
   Widget _buildTitle() {
     return new Container(
       margin: const EdgeInsets.only(top: 29.0, left: 15.0, right: 15.0),
@@ -98,7 +98,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
           new Container(
             margin: const EdgeInsets.only(left: 110.0),
             child: new Text(
-              "任务中心",
+              "浠诲姟涓�蹇�",
               style: new TextStyle(fontSize: 18.0, color: Colors.white),
 
             ),
@@ -108,7 +108,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     );
   }
 
-  /// 当前用户的信息组件
+  /// 褰撳墠鐢ㄦ埛鐨勪俊鎭�缁勪欢
   Widget _buildUser() {
     return new Stack(
       children: <Widget>[
@@ -142,7 +142,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
               new Row(
                 children: <Widget>[
                   new Text(
-                    "陈明明",
+                    "闄堟槑鏄�",
                     style: new TextStyle(
                         fontSize: 18.0, color: StudentColors.s_484848),
                   ),
@@ -213,7 +213,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     );
   }
 
-  /// 日常任务特殊任务组件
+  /// 鏃ュ父浠诲姟鐗规畩浠诲姟缁勪欢
   Widget _buildTaskwidget() {
     return new Flexible(
       child: new Container(
@@ -317,7 +317,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     );
   }
 
-  /// tab下面的listview
+  /// tab涓嬮潰鐨刲istview
   Widget _bulidListWidget(BuildContext context, int index) {
     return new ListView.builder(
         padding: const EdgeInsets.only(top: 0.0),
@@ -327,9 +327,9 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
         });
   }
 
-  /// Listview 的item
+  /// Listview 鐨刬tem
   Widget _buildListItem(int index) {
-    /// 添加分割线
+    /// 娣诲姞鍒嗗壊绾�
     if (index.isOdd) {
       return new Container(
         margin: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -359,7 +359,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
                     left: 10.0,
                   ),
                   child: new Text(
-                    "每日阅读",
+                    "姣忔棩闃呰��",
                     style: new TextStyle(
                         fontSize: 15.0, color: StudentColors.s_484848),
                   ),
@@ -369,7 +369,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
                     left: 5.0,
                   ),
                   child: new Text(
-                    "阅读30分钟并打卡",
+                    "闃呰��30鍒嗛挓骞舵墦鍗�",
                     style: new TextStyle(
                         fontSize: 12.0, color: StudentColors.s_484848),
                   ),
@@ -378,7 +378,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
                   child: new Container(
                     margin: const EdgeInsets.only(left: 41.0),
                     child: new Text(
-                      "进度  40 /100",
+                      "杩涘害  40 /100",
                       style: new TextStyle(
                           color: StudentColors.s_9a9a9a, fontSize: 10.0),
                     ),
@@ -394,14 +394,14 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 new Text(
-                  "+30积分",
+                  "+30绉�鍒�",
                   style: new TextStyle(
                       color: StudentColors.s_9a9a9a, fontSize: 12.0),
                 ),
                 new Container(
                   margin: const EdgeInsets.only(right: 100.0),
                   child: new Text(
-                    "+30战斗力",
+                    "+30鎴樻枟鍔�",
                     style: new TextStyle(
                         color: StudentColors.s_9a9a9a, fontSize: 12.0),
                   ),
@@ -412,7 +412,7 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
                   child: new FlatButton(
                     onPressed: null,
                     child: new Text(
-                      "领取",
+                      "棰嗗彇",
                       style: new TextStyle(fontSize: 14.0, color: Colors.white),
                     ),
                     shape: new StadiumBorder(),
@@ -427,13 +427,13 @@ class _TaskCenterPagePageState extends State<TaskCenterPage> {
     );
   }
 
-  /// PageView中onPageChanged代表页面改变的时候
+  /// PageView涓璷nPageChanged浠ｈ〃椤甸潰鏀瑰彉鐨勬椂鍊�
   pageChanged(int index) {
     _curIndex = index;
     setState(() {});
   }
 
-  /// title项下滑线透明度的改变
+  /// title椤逛笅婊戠嚎閫忔槑搴︾殑鏀瑰彉
   double _setOpacity(int index) {
     if (index == _curIndex) {
       _learnOpacity = 1.0;

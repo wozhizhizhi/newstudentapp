@@ -40,6 +40,7 @@ class _ReadingVolumePageState extends State<ReadingVolumePage> {
     return new Scaffold(
       appBar: new MyAppBar(
         leading: new GestureDetector(child: new Container(
+
           padding: const EdgeInsets.all(10.0),
           child: new Image.asset(
             "images/btn_back_yellow.png",
